@@ -6,10 +6,11 @@ import android.view.View
 import android.widget.FrameLayout
 import com.kidsharu.kidsharu.R
 import com.kidsharu.kidsharu.model.ImagePreview
+import com.kidsharu.kidsharu.other.ActivityUtil
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.view_image_preview.view.*
 
-class ImagePreviewView: FrameLayout, View.OnClickListener {
+class ImagePreviewView: FrameLayout {
 
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
@@ -19,8 +20,6 @@ class ImagePreviewView: FrameLayout, View.OnClickListener {
 
     init {
         View.inflate(context, R.layout.view_image_preview, this)
-
-        setOnClickListener(this)
     }
 
     fun setPreview(preview: ImagePreview) {
@@ -29,7 +28,7 @@ class ImagePreviewView: FrameLayout, View.OnClickListener {
         Picasso.get().load(preview.url).into(image_view)
     }
 
-    override fun onClick(p0: View?) {
-
+    fun getPreview(): ImagePreview? {
+        return preview
     }
 }
