@@ -1,9 +1,10 @@
-package com.kidsharu.kidsharu
+package com.kidsharu.kidsharu.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
+import com.kidsharu.kidsharu.DummyDatabaseClient
+import com.kidsharu.kidsharu.R
 import com.kidsharu.kidsharu.other.GridSpacingItemDecoration
 import com.kidsharu.kidsharu.recylcer_view.AlbumRecyclerAdapter
 import kotlinx.android.synthetic.main.activity_main.*

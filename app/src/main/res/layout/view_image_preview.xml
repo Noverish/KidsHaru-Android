@@ -6,18 +6,8 @@
     android:orientation="vertical">
 
     <ImageView
-        android:id="@+id/cover_image_view"
+        android:id="@+id/image_view"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="135dp"
         android:scaleType="centerCrop"/>
-
-    <TextView
-        android:id="@+id/title_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/date_label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 </LinearLayout>

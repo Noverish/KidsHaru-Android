@@ -8,7 +8,7 @@ import com.kidsharu.kidsharu.view.AlbumPreviewView
 
 class AlbumRecyclerAdapter(
         private val previews: Array<AlbumPreview>
-): RecyclerView.Adapter<AlbumPreviewHolder>() {
+) : RecyclerView.Adapter<AlbumPreviewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumPreviewHolder {
         val previewView = AlbumPreviewView(parent.context)
