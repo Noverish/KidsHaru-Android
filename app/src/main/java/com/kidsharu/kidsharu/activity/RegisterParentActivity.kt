@@ -19,7 +19,7 @@ class RegisterParentActivity: AppCompatActivity() {
     private fun registerBtnClicked() {
         val id = id_field.text.toString()
         val pw = pw_field.text.toString()
-        val pwConfirm = pw_confirm_field.text.toString()
+        val pwConfirm = pw_confirm_field.text.toString() // TODO pw confirm
         val inviteCode = invite_code_field.text.toString()
 
         ServerClient.parentRegister(id, pw, inviteCode) { errMsg ->

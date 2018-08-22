@@ -1,7 +1,8 @@
 package com.kidsharu.kidsharu.other
 
 import android.os.Handler
-import com.kidsharu.kidsharu.model.AlbumPreview
+import com.kidsharu.kidsharu.model.Album
+import com.kidsharu.kidsharu.model.Picture
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -150,7 +151,7 @@ object ServerClient {
     }
 
 
-    fun teacherAlbumList(callback: (Array<AlbumPreview>, String?) -> Unit) {
+    fun teacherAlbumList(callback: (Array<Album>, String?) -> Unit) {
         val path = "/teachers/$teacherId/albums"
         val parameter = ""
 
@@ -158,9 +159,27 @@ object ServerClient {
             when (code) {
                 200 -> {
                     val albumArray = Array(array.length()) {
-                        AlbumPreview(array.getJSONObject(it))
+                        Album(array.getJSONObject(it))
                     }
                     callback(albumArray, null)
+                }
+                else -> callback(emptyArray(), json.getString("msg"))
+            }
+        }
+    }
+
+    fun albumPictureList(albumId: Int,
+                         callback: (Array<Picture>, String?) -> Unit) {
+        val path = "/albums/$albumId/pictures"
+        val parameter = ""
+
+        request(parameter, path, Method.GET) { code, json, array ->
+            when (code) {
+                200 -> {
+                    val pictureArray = Array(array.length()) {
+                        Picture(array.getJSONObject(it))
+                    }
+                    callback(pictureArray, null)
                 }
                 else -> callback(emptyArray(), json.getString("msg"))
             }

@@ -5,36 +5,36 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import com.kidsharu.kidsharu.R
-import com.kidsharu.kidsharu.model.AlbumPreview
+import com.kidsharu.kidsharu.model.Album
 import com.kidsharu.kidsharu.other.ActivityUtil
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.view_album_preview.view.*
+import kotlinx.android.synthetic.main.view_album.view.*
 
-class AlbumPreviewView : FrameLayout, View.OnClickListener {
+class AlbumView : FrameLayout, View.OnClickListener {
 
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    private var preview: AlbumPreview? = null
+    private var album: Album? = null
 
     init {
-        View.inflate(context, R.layout.view_album_preview, this)
+        View.inflate(context, R.layout.view_album, this)
 
         setOnClickListener(this)
     }
 
-    fun setPreview(preview: AlbumPreview) {
-        this.preview = preview
+    fun setPreview(album: Album) {
+        this.album = album
 
-        Picasso.get().load(preview.coverImgUrl).into(cover_image_view)
-        title_label.text = preview.title
-        date_label.text = preview.date
+        Picasso.get().load(album.coverImgUrl).into(cover_image_view)
+        title_label.text = album.title
+        date_label.text = album.date
     }
 
     override fun onClick(p0: View?) {
-        val preview = preview ?: return
+        val album = album ?: return
 
-        ActivityUtil.albumDetail(context, preview)
+        ActivityUtil.albumDetail(context, album)
     }
 }

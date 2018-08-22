@@ -4,19 +4,19 @@ import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import com.kidsharu.kidsharu.R
-import com.kidsharu.kidsharu.model.ImagePreview
+import com.kidsharu.kidsharu.model.Picture
 import com.kidsharu.kidsharu.other.ActivityUtil
-import com.kidsharu.kidsharu.view_pager.ImagePagerAdapter
+import com.kidsharu.kidsharu.view_pager.PicturePagerAdapter
 import kotlinx.android.synthetic.main.activity_image.*
 
-class ImageActivity : AppCompatActivity() {
+class PictureActivity : AppCompatActivity() {
     companion object {
         const val POSITION_INTENT_KEY = "position"
-        const val IMAGE_INTENT_KEY = "previews"
+        const val PICTURES_INTENT_KEY = "previews"
     }
 
-    var nowPosition = 0
-    lateinit var imagePreviews: Array<ImagePreview>
+    private var nowPosition = 0
+    private lateinit var pictures: Array<Picture>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,11 +24,11 @@ class ImageActivity : AppCompatActivity() {
         ActivityUtil.setFullScreen(this.window)
 
         nowPosition = intent.getIntExtra(POSITION_INTENT_KEY, 0)
-        imagePreviews = intent.getParcelableArrayListExtra<ImagePreview>(IMAGE_INTENT_KEY).toTypedArray()
+        pictures = intent.getParcelableArrayExtra(PICTURES_INTENT_KEY).map { it as Picture }.toTypedArray()
 
-        total_page_label.text = "${imagePreviews.size}"
+        total_page_label.text = "${pictures.size}"
 
-        view_pager.adapter = ImagePagerAdapter(imagePreviews)
+        view_pager.adapter = PicturePagerAdapter(pictures)
         view_pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 

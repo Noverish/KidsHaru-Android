@@ -8,7 +8,6 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.GridLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import com.kidsharu.kidsharu.DummyDatabaseClient
 import com.kidsharu.kidsharu.R
 import com.kidsharu.kidsharu.other.ActivityUtil
 import com.kidsharu.kidsharu.other.GridSpacingItemDecoration
@@ -40,11 +39,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         recycler_view.adapter = AlbumRecyclerAdapter(emptyArray())
         recycler_view.layoutManager = GridLayoutManager(this, 2)
         recycler_view.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
-
-//        DummyDatabaseClient.getTeacherAlbumList(0, 0) { previews ->
-//            albumRecyclerAdapter = AlbumRecyclerAdapter(previews)
-//            recycler_view.adapter = albumRecyclerAdapter
-//        }
     }
 
     override fun onBackPressed() {

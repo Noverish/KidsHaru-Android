@@ -1,19 +1,15 @@
 package com.kidsharu.kidsharu.other
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Handler
-import android.support.design.widget.AppBarLayout
 import android.view.View
 import android.view.Window
-import com.kidsharu.kidsharu.DummyDatabaseClient
-import com.kidsharu.kidsharu.R
+import android.widget.Toast
 import com.kidsharu.kidsharu.activity.*
-import com.kidsharu.kidsharu.model.AlbumPreview
-import com.kidsharu.kidsharu.model.ImagePreview
+import com.kidsharu.kidsharu.dialog.LoadingDialogHelper
+import com.kidsharu.kidsharu.model.Album
+import com.kidsharu.kidsharu.model.Picture
 
 object ActivityUtil {
 
@@ -45,11 +41,19 @@ object ActivityUtil {
     }
 
     fun albumDetail(context: Context,
-                    preview: AlbumPreview) {
-        DummyDatabaseClient.getAlbumDetail(preview.albumId) { detail ->
-            val intent = Intent(context, AlbumDetailActivity::class.java)
-            intent.putExtra(AlbumDetailActivity.DETAIL_INTENT_KEY, detail)
-            context.startActivity(intent)
+                    album: Album) {
+        LoadingDialogHelper.show(context)
+        ServerClient.albumPictureList(album.albumId) { pictures, errMsg ->
+            LoadingDialogHelper.dismiss()
+            if (errMsg != null) {
+                Toast.makeText(context, errMsg, Toast.LENGTH_SHORT).show()
+            } else {
+                println("album $album")
+                val intent = Intent(context, AlbumDetailActivity::class.java)
+                intent.putExtra(AlbumDetailActivity.ALBUM_INTENT_KEY, album)
+                intent.putExtra(AlbumDetailActivity.PICTURES_INTENT_KEY, pictures)
+                context.startActivity(intent)
+            }
         }
     }
 
@@ -57,14 +61,14 @@ object ActivityUtil {
         context.startActivity(Intent(context, AlbumAddActivity::class.java))
     }
 
-    fun imageDetail(context: Context,
-                    previews: Array<ImagePreview>,
-                    nowPage: Int? = null) {
-        val intent = Intent(context, ImageActivity::class.java)
+    fun pictureDetail(context: Context,
+                      pictures: Array<Picture>,
+                      nowPage: Int? = null) {
+        val intent = Intent(context, PictureActivity::class.java)
         nowPage?.let {
-            intent.putExtra(ImageActivity.POSITION_INTENT_KEY, it)
+            intent.putExtra(PictureActivity.POSITION_INTENT_KEY, it)
         }
-        intent.putExtra(ImageActivity.IMAGE_INTENT_KEY, ArrayList(previews.toList()))
+        intent.putExtra(PictureActivity.PICTURES_INTENT_KEY, pictures)
         context.startActivity(intent)
     }
 }

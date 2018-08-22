@@ -1,31 +1,26 @@
 package com.kidsharu.kidsharu.view_pager
 
-import android.content.Context
-import android.graphics.Bitmap
 import android.support.v4.view.PagerAdapter
-import android.util.SparseArray
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Toast
-import com.kidsharu.kidsharu.model.ImagePreview
 import com.squareup.picasso.Picasso
 import com.github.chrisbanes.photoview.PhotoView
+import com.kidsharu.kidsharu.model.Picture
 
-class ImagePagerAdapter(
-        private val previews: Array<ImagePreview>
+class PicturePagerAdapter(
+        private val pictures: Array<Picture>
 ) : PagerAdapter() {
 
     // TODO View holder Pattern
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val imageView = PhotoView(container.context)
         container.addView(imageView)
-        Picasso.get().load(previews[position].url).into(imageView)
+        Picasso.get().load(pictures[position].pictureUrl).into(imageView)
         return imageView
     }
 
     override fun getCount(): Int {
-        return previews.size
+        return pictures.size
     }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {

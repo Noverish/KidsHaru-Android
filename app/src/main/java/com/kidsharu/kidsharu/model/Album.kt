@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import org.json.JSONObject
 
-open class AlbumPreview(
+open class Album(
         val albumId: Int,
         val coverImgUrl: String,
         val title: String,
@@ -12,7 +12,7 @@ open class AlbumPreview(
         val date: String
 ) : Parcelable {
     override fun toString(): String {
-        return "AlbumPreview(albumId=$albumId, coverImgUrl='$coverImgUrl', title='$title', content='$content', date='$date')"
+        return "Album(albumId=$albumId, coverImgUrl='$coverImgUrl', title='$title', content='$content', date='$date')"
     }
 
     constructor(json: JSONObject) : this(
@@ -43,9 +43,9 @@ open class AlbumPreview(
 
     companion object {
         @JvmField
-        val CREATOR: Parcelable.Creator<AlbumPreview> = object : Parcelable.Creator<AlbumPreview> {
-            override fun createFromParcel(source: Parcel): AlbumPreview = AlbumPreview(source)
-            override fun newArray(size: Int): Array<AlbumPreview?> = arrayOfNulls(size)
+        val CREATOR: Parcelable.Creator<Album> = object : Parcelable.Creator<Album> {
+            override fun createFromParcel(source: Parcel): Album = Album(source)
+            override fun newArray(size: Int): Array<Album?> = arrayOfNulls(size)
         }
     }
 }

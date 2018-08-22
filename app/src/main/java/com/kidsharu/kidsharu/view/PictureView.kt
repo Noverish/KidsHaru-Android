@@ -5,30 +5,29 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 import com.kidsharu.kidsharu.R
-import com.kidsharu.kidsharu.model.ImagePreview
-import com.kidsharu.kidsharu.other.ActivityUtil
+import com.kidsharu.kidsharu.model.Picture
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.view_image_preview.view.*
+import kotlinx.android.synthetic.main.view_picture.view.*
 
-class ImagePreviewView: FrameLayout {
+class PictureView: FrameLayout {
 
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    private var preview: ImagePreview? = null
+    private var picture: Picture? = null
 
     init {
-        View.inflate(context, R.layout.view_image_preview, this)
+        View.inflate(context, R.layout.view_picture, this)
     }
 
-    fun setPreview(preview: ImagePreview) {
-        this.preview = preview
+    fun setPicture(picture: Picture) {
+        this.picture = picture
 
-        Picasso.get().load(preview.url).into(image_view)
+        Picasso.get().load(picture.pictureUrl).into(image_view)
     }
 
-    fun getPreview(): ImagePreview? {
-        return preview
+    fun getPicture(): Picture? {
+        return picture
     }
 }

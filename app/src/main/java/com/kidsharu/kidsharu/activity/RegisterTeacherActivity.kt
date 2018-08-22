@@ -19,7 +19,7 @@ class RegisterTeacherActivity: AppCompatActivity() {
     private fun registerBtnClicked() {
         val id = id_field.text.toString()
         val pw = pw_field.text.toString()
-        val pwConfirm = pw_confirm_field.text.toString()
+        val pwConfirm = pw_confirm_field.text.toString() // TODO pw confirm
         val name = name_field.text.toString()
 
         ServerClient.teacherRegister(id, pw, name) { errMsg ->
