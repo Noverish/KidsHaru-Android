@@ -7,12 +7,14 @@ class AlbumDetail(
         albumId: Int,
         coverImgUrl: String,
         title: String,
+        content: String,
         date: String,
         val childrenNum: Int,
         val imagePreviews: Array<ImagePreview>
-) : AlbumPreview(albumId, coverImgUrl, title, date), Parcelable {
+) : AlbumPreview(albumId, coverImgUrl, title, content, date), Parcelable {
     constructor(source: Parcel) : this(
             source.readInt(),
+            source.readString(),
             source.readString(),
             source.readString(),
             source.readString(),

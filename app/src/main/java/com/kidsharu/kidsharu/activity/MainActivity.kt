@@ -41,10 +41,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         recycler_view.layoutManager = GridLayoutManager(this, 2)
         recycler_view.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
 
-        DummyDatabaseClient.getTeacherAlbumList(0, 0) { previews ->
-            albumRecyclerAdapter = AlbumRecyclerAdapter(previews)
-            recycler_view.adapter = albumRecyclerAdapter
-        }
+//        DummyDatabaseClient.getTeacherAlbumList(0, 0) { previews ->
+//            albumRecyclerAdapter = AlbumRecyclerAdapter(previews)
+//            recycler_view.adapter = albumRecyclerAdapter
+//        }
     }
 
     override fun onBackPressed() {
