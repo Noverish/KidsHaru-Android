@@ -11,6 +11,7 @@ import android.view.View
 import android.view.Window
 import com.kidsharu.kidsharu.DummyDatabaseClient
 import com.kidsharu.kidsharu.R
+import com.kidsharu.kidsharu.activity.AlbumAddActivity
 import com.kidsharu.kidsharu.activity.AlbumDetailActivity
 import com.kidsharu.kidsharu.activity.ImageActivity
 import com.kidsharu.kidsharu.model.AlbumPreview
@@ -48,6 +49,10 @@ object ActivityUtil {
             intent.putExtra(AlbumDetailActivity.DETAIL_INTENT_KEY, detail)
             context.startActivity(intent)
         }
+    }
+
+    fun albumAdd(context: Context) {
+        context.startActivity(Intent(context, AlbumAddActivity::class.java))
     }
 
     fun imageDetail(context: Context,
