@@ -11,9 +11,7 @@ import android.view.View
 import android.view.Window
 import com.kidsharu.kidsharu.DummyDatabaseClient
 import com.kidsharu.kidsharu.R
-import com.kidsharu.kidsharu.activity.AlbumAddActivity
-import com.kidsharu.kidsharu.activity.AlbumDetailActivity
-import com.kidsharu.kidsharu.activity.ImageActivity
+import com.kidsharu.kidsharu.activity.*
 import com.kidsharu.kidsharu.model.AlbumPreview
 import com.kidsharu.kidsharu.model.ImagePreview
 
@@ -26,10 +24,6 @@ object ActivityUtil {
                 View.SYSTEM_UI_FLAG_FULLSCREEN
         )
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            flags.add(View.SYSTEM_UI_FLAG_IMMERSIVE)
-        }
-
         var tmp = window.decorView.systemUiVisibility
         for (flag in flags)
             tmp = tmp or flag
@@ -40,6 +34,14 @@ object ActivityUtil {
                 Handler().postDelayed({ setFullScreen(window) }, 4000)
             }
         }
+    }
+
+    fun registerTeacher(context: Context) {
+        context.startActivity(Intent(context, RegisterTeacherActivity::class.java))
+    }
+
+    fun registerParent(context: Context) {
+        context.startActivity(Intent(context, RegisterParentActivity::class.java))
     }
 
     fun albumDetail(context: Context,
