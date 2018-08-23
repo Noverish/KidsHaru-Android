@@ -7,11 +7,16 @@ import android.widget.Toast
 import com.kidsharu.kidsharu.R
 import com.kidsharu.kidsharu.other.ServerClient
 import kotlinx.android.synthetic.main.activity_register.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class RegisterTeacherActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        toolbar_title.text = "선생님으로 회원가입"
+
         invite_code_field.visibility = View.GONE
         register_btn.setOnClickListener { registerBtnClicked() }
     }

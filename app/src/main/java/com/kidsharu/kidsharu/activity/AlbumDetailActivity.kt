@@ -10,6 +10,7 @@ import com.kidsharu.kidsharu.other.GridSpacingItemDecoration
 import com.kidsharu.kidsharu.recylcer_view.PictureRecyclerAdapter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_album_detail.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class AlbumDetailActivity: AppCompatActivity() {
     companion object {
@@ -23,10 +24,13 @@ class AlbumDetailActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_album_detail)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
 
         album = intent.getParcelableExtra(ALBUM_INTENT_KEY)
         pictures = intent.getParcelableArrayExtra(PICTURES_INTENT_KEY).map { it as Picture }.toTypedArray()
 
+        toolbar_title.text = album.title
         Picasso.get().load(album.coverImgUrl).into(album_cover_image_view)
         shared_date_label.text = album.date
 //        children_num_label.text = "${album.childrenNum} 명"

@@ -14,12 +14,15 @@ import com.kidsharu.kidsharu.other.ServerClient
 import com.kidsharu.kidsharu.recylcer_view.AlbumRecyclerAdapter
 import com.kidsharu.kidsharu.recylcer_view.ChildRecyclerAdapter
 import kotlinx.android.synthetic.main.activity_parent_home.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class ParentHomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_parent_home)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        toolbar_title.text = "내 아이 앨범"
 
         val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)

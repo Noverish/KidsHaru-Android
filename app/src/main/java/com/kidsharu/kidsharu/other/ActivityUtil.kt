@@ -32,6 +32,10 @@ object ActivityUtil {
         }
     }
 
+    fun login(context: Context) {
+        context.startActivity(Intent(context, LoginActivity::class.java))
+    }
+
     fun registerTeacher(context: Context) {
         context.startActivity(Intent(context, RegisterTeacherActivity::class.java))
     }

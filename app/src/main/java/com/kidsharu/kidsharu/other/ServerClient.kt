@@ -26,8 +26,8 @@ object ServerClient {
     private val handler = Handler()
 
     private var accessToken = ""
-    private var teacherId = 1
-    private var parentId = 1
+    private var teacherId = 0
+    private var parentId = 0
 
     private fun request(parameter: String, path: String, method: Method, callback: (Int, JSONObject, JSONArray) -> Unit) {
         thread {

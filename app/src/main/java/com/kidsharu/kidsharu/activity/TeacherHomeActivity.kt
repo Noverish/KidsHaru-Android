@@ -9,11 +9,15 @@ import com.kidsharu.kidsharu.other.GridSpacingItemDecoration
 import com.kidsharu.kidsharu.other.ServerClient
 import com.kidsharu.kidsharu.recylcer_view.AlbumRecyclerAdapter
 import kotlinx.android.synthetic.main.activity_teacher_home.*
+import kotlinx.android.synthetic.main.toolbar.*
 
 class TeacherHomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_teacher_home)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        toolbar_title.text = "앨범 리스트"
 
         album_add_btn.setOnClickListener { ActivityUtil.albumAdd(this) }
 

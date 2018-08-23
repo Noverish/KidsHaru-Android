@@ -1,69 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+    <include layout="@layout/toolbar" />
 
-        <RadioButton
-            android:id="@+id/teacher_radio"
-            android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/teacher" />
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="60dp"
+            android:layout_marginStart="60dp"
+            android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/parent_radio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/parent" />
-    </RadioGroup>
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/id_field"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/id"
-        android:inputType="text" />
+                <RadioButton
+                    android:id="@+id/teacher_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/teacher" />
 
-    <EditText
-        android:id="@+id/password_field"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/pw"
-        android:inputType="textPassword" />
+                <RadioButton
+                    android:id="@+id/parent_radio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/parent" />
+            </RadioGroup>
 
-    <Button
-        android:id="@+id/login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login" />
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/register_teacher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/register_as_teacher" />
+                <TextView
+                    android:id="@+id/id_label"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center|end"
+                    android:labelFor="@id/id_field"
+                    android:padding="8dp"
+                    android:text="@string/id"
+                    app:layout_constraintBottom_toBottomOf="@id/id_field"
+                    app:layout_constraintEnd_toEndOf="@id/pw_label"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/register_parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/register_as_parent" />
+                <EditText
+                    android:id="@+id/id_field"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/id_label"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/go_to_teacher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go To Teacher"/>
+                <TextView
+                    android:id="@+id/pw_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center|end"
+                    android:labelFor="@id/pw_field"
+                    android:padding="8dp"
+                    android:text="@string/pw"
+                    app:layout_constraintEnd_toStartOf="@id/pw_label"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/id_label" />
 
-    <Button
-        android:id="@+id/go_to_parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Go To Parent"/>
+                <EditText
+                    android:id="@+id/pw_field"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/pw_label"
+                    app:layout_constraintTop_toBottomOf="@id/id_label" />
+            </android.support.constraint.ConstraintLayout>
+
+            <Button
+                android:id="@+id/login_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login" />
+
+            <TextView
+                android:id="@+id/register_teacher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/register_as_teacher" />
+
+            <TextView
+                android:id="@+id/register_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/register_as_parent" />
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

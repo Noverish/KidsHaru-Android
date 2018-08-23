@@ -27,7 +27,7 @@ class ChildView : FrameLayout, View.OnClickListener {
     fun setChild(child: Child) {
         this.child = child
 
-        Picasso.get().load(child.profileImgUrl).into(profile_image_view)
+        Picasso.get().load(child.profileImg).into(profile_image_view)
         name_label.text = child.name
     }
 
