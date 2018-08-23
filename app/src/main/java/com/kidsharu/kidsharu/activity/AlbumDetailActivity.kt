@@ -30,8 +30,8 @@ class AlbumDetailActivity: AppCompatActivity() {
         Picasso.get().load(album.coverImgUrl).into(album_cover_image_view)
         shared_date_label.text = album.date
 //        children_num_label.text = "${album.childrenNum} 명"
-        recycler_view.adapter = PictureRecyclerAdapter(pictures)
-        recycler_view.layoutManager = GridLayoutManager(this, 3)
-        recycler_view.addItemDecoration(GridSpacingItemDecoration(3, 4, false))
+        album_recycler_view.adapter = PictureRecyclerAdapter(pictures)
+        album_recycler_view.layoutManager = GridLayoutManager(this, 3)
+        album_recycler_view.addItemDecoration(GridSpacingItemDecoration(3, 4, false))
     }
 }

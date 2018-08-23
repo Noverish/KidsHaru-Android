@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import android.os.Handler
 import com.kidsharu.kidsharu.model.Album
 import com.kidsharu.kidsharu.model.AlbumStatus
+import com.kidsharu.kidsharu.model.Child
 import com.kidsharu.kidsharu.model.Picture
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
@@ -68,6 +69,7 @@ object ServerClient {
         }
     }
 
+    // auth
     fun teacherRegister(id: String,
                         password: String,
                         name: String,
@@ -156,7 +158,23 @@ object ServerClient {
         }
     }
 
+    // child
+    fun parentChildList(callback: (Array<Child>, String?) -> Unit) {
+        val path = "/parents/$parentId/children"
+        val parameter = ""
 
+        request(parameter, path, Method.GET) { code, json, array ->
+            when (code) {
+                200 -> {
+                    val childArray = Array(array.length()) { Child(array.getJSONObject(it)) }
+                    callback(childArray, null)
+                }
+                else -> callback(emptyArray(), json.getString("msg"))
+            }
+        }
+    }
+
+    // album
     fun teacherAlbumList(callback: (Array<Album>, String?) -> Unit) {
         val path = "/teachers/$teacherId/albums"
         val parameter = ""
@@ -189,6 +207,21 @@ object ServerClient {
         }
     }
 
+    fun parentAlbumList(callback: (Array<Album>, String?) -> Unit) {
+        val path = "/parents/$parentId/albums"
+        val parameter = ""
+
+        request(parameter, path, Method.GET) { code, json, array ->
+            when (code) {
+                200 -> {
+                    val albumArray = Array(array.length()) { Album(array.getJSONObject(it)) }
+                    callback(albumArray, null)
+                }
+                else -> callback(emptyArray(), json.getString("msg"))
+            }
+        }
+    }
+
     fun albumModify(albumId: Int,
                     title: String? = null,
                     content: String? = null,
@@ -209,6 +242,7 @@ object ServerClient {
         }
     }
 
+    // picture
     fun albumPictureList(albumId: Int,
                          callback: (Array<Picture>, String?) -> Unit) {
         val path = "/albums/$albumId/pictures"

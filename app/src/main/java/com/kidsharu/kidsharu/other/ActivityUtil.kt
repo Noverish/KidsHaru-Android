@@ -45,7 +45,7 @@ object ActivityUtil {
     }
 
     fun parentHome(context: Context) {
-        context.startActivity(Intent(context, MainActivity::class.java))
+        context.startActivity(Intent(context, ParentHomeActivity::class.java))
     }
 
     fun albumDetail(context: Context,

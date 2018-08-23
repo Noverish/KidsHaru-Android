@@ -7,7 +7,7 @@ import com.kidsharu.kidsharu.model.Album
 import com.kidsharu.kidsharu.view.AlbumView
 
 class AlbumRecyclerAdapter(
-        private val previews: Array<Album>
+        private val albums: Array<Album>
 ) : RecyclerView.Adapter<AlbumPreviewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumPreviewHolder {
@@ -17,14 +17,14 @@ class AlbumRecyclerAdapter(
     }
 
     override fun getItemCount(): Int {
-        return previews.size
+        return albums.size
     }
 
     override fun onBindViewHolder(holder: AlbumPreviewHolder, position: Int) {
         val view = holder.itemView as? AlbumView ?: return
-        val preview = previews[position]
+        val album = albums[position]
 
-        view.setPreview(preview)
+        view.setAlbum(album)
     }
 }
 

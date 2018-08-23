@@ -24,7 +24,7 @@ class AlbumView : FrameLayout, View.OnClickListener {
         setOnClickListener(this)
     }
 
-    fun setPreview(album: Album) {
+    fun setAlbum(album: Album) {
         this.album = album
 
         Picasso.get().load(album.coverImgUrl).into(cover_image_view)

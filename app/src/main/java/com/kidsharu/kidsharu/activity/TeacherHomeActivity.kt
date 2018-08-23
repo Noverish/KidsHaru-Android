@@ -17,12 +17,12 @@ class TeacherHomeActivity : AppCompatActivity() {
 
         album_add_btn.setOnClickListener { ActivityUtil.albumAdd(this) }
 
-        recycler_view.adapter = AlbumRecyclerAdapter(emptyArray())
-        recycler_view.layoutManager = GridLayoutManager(this, 2)
-        recycler_view.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
+        album_recycler_view.adapter = AlbumRecyclerAdapter(emptyArray())
+        album_recycler_view.layoutManager = GridLayoutManager(this, 2)
+        album_recycler_view.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
 
         ServerClient.teacherAlbumList { albums, errMsg ->
-            recycler_view.adapter = AlbumRecyclerAdapter(albums)
+            album_recycler_view.adapter = AlbumRecyclerAdapter(albums)
             errMsg?.let { println(it) }
         }
     }
