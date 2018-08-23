@@ -16,6 +16,8 @@ class LoginActivity : AppCompatActivity() {
         login_button.setOnClickListener { loginBtnClicked() }
         register_teacher.setOnClickListener { ActivityUtil.registerTeacher(this) }
         register_parent.setOnClickListener { ActivityUtil.registerParent(this) }
+        go_to_teacher.setOnClickListener { ActivityUtil.teacherHome(this) }
+        go_to_parent.setOnClickListener { ActivityUtil.parentHome(this) }
     }
 
     private fun loginBtnClicked() {

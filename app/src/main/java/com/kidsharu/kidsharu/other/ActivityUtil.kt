@@ -40,6 +40,14 @@ object ActivityUtil {
         context.startActivity(Intent(context, RegisterParentActivity::class.java))
     }
 
+    fun teacherHome(context: Context) {
+        context.startActivity(Intent(context, TeacherHomeActivity::class.java))
+    }
+
+    fun parentHome(context: Context) {
+        context.startActivity(Intent(context, MainActivity::class.java))
+    }
+
     fun albumDetail(context: Context,
                     album: Album) {
         LoadingDialogHelper.show(context)

@@ -2,28 +2,29 @@ package com.kidsharu.kidsharu.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import com.esafirm.imagepicker.features.ImagePicker
 import com.kidsharu.kidsharu.R
+import com.kidsharu.kidsharu.service.AlbumAddService
 import kotlinx.android.synthetic.main.activity_album_add.*
 
-class AlbumAddActivity: AppCompatActivity() {
+class AlbumAddActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_album_add)
 
         confirm_button.setOnClickListener {
-            ImagePicker.create(this).start()
+            ImagePicker.create(this).folderMode(true).start()
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
-            // Get a list of picked images
-            val images = ImagePicker.getImages(data)
-            // or get a single image only
-            val image = ImagePicker.getFirstImageOrNull(data)
+            startService(Intent(this, AlbumAddService::class.java).apply {
+                putExtra(AlbumAddService.TITLE_INTENT_KEY, album_title_field.text.toString())
+                putExtra(AlbumAddService.CONTENT_INTENT_KEY, album_content_field.text.toString())
+                putExtra(AlbumAddService.PATHS_INTENT_KEY, ImagePicker.getImages(data).map { it.path }.toTypedArray())
+            })
 
             finish()
         }

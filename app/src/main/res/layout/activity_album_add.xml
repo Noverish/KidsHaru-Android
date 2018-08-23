@@ -18,7 +18,12 @@
             android:text="만들 앨범의 이름을 입력해 주세요"/>
 
         <EditText
-            android:id="@+id/album_name_field"
+            android:id="@+id/album_title_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/album_content_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

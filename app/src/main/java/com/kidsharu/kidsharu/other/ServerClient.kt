@@ -1,7 +1,10 @@
 package com.kidsharu.kidsharu.other
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Handler
 import com.kidsharu.kidsharu.model.Album
+import com.kidsharu.kidsharu.model.AlbumStatus
 import com.kidsharu.kidsharu.model.Picture
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
@@ -10,12 +13,14 @@ import okhttp3.RequestBody
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.ByteArrayOutputStream
 import kotlin.concurrent.thread
 
 
 object ServerClient {
     private const val HOST = "https://fc3i3hiwel.execute-api.ap-northeast-2.amazonaws.com/develop"
     private val JSON = MediaType.parse("application/json; charset=utf-8")
+    private val JPEG = MediaType.parse("image/jpeg")
     private val client = OkHttpClient()
     private val handler = Handler()
 
@@ -43,6 +48,7 @@ object ServerClient {
 
             val response = client.newCall(request).execute()
             val string = response.body()?.string()
+            println("<HTTP> $parameter $path $method $string")
 
             val jsonObject = try {
                 JSONObject(string)
@@ -158,12 +164,47 @@ object ServerClient {
         request(parameter, path, Method.GET) { code, json, array ->
             when (code) {
                 200 -> {
-                    val albumArray = Array(array.length()) {
-                        Album(array.getJSONObject(it))
-                    }
+                    val albumArray = Array(array.length()) { Album(array.getJSONObject(it)) }
                     callback(albumArray, null)
                 }
                 else -> callback(emptyArray(), json.getString("msg"))
+            }
+        }
+    }
+
+    fun teacherAlbumAdd(title: String,
+                        content: String,
+                        callback: (Album?, String?) -> Unit) {
+        val path = "/teachers/$teacherId/albums"
+        val parameter = JSONObject().apply {
+            put("title", title)
+            put("content", content)
+        }.toString()
+
+        request(parameter, path, Method.POST) { code, json, _ ->
+            when (code) {
+                200 -> callback(Album(json), null)
+                else -> callback(null, json.getString("msg"))
+            }
+        }
+    }
+
+    fun albumModify(albumId: Int,
+                    title: String? = null,
+                    content: String? = null,
+                    status: AlbumStatus? = null,
+                    callback: (String?) -> Unit) {
+        val path = "/albums/$albumId"
+        val parameter = JSONObject().apply {
+            if (title != null) put("title", title)
+            if (content != null) put("content", content)
+            if (status != null) put("status", status.toString())
+        }.toString()
+
+        request(parameter, path, Method.PUT) { code, json, _ ->
+            when (code) {
+                204 -> callback(null)
+                else -> callback(json.getString("msg"))
             }
         }
     }
@@ -176,12 +217,72 @@ object ServerClient {
         request(parameter, path, Method.GET) { code, json, array ->
             when (code) {
                 200 -> {
-                    val pictureArray = Array(array.length()) {
-                        Picture(array.getJSONObject(it))
-                    }
+                    val pictureArray = Array(array.length()) { Picture(array.getJSONObject(it)) }
                     callback(pictureArray, null)
                 }
                 else -> callback(emptyArray(), json.getString("msg"))
+            }
+        }
+    }
+
+    fun albumPictureAdd(albumId: Int,
+                        pictureId: Int,
+                        fileName: String,
+                        callback: (Picture?, String?) -> Unit) {
+        val path = "/albums/$albumId/pictures"
+        val parameter = JSONObject().apply {
+            put("picture_id", pictureId)
+            put("file_name", fileName)
+        }.toString()
+
+        request(parameter, path, Method.POST) { code, json, _ ->
+            when (code) {
+                200 -> callback(Picture(json), null)
+                else -> callback(null, json.getString("msg"))
+            }
+        }
+    }
+
+    fun pictureUpload(albumId: Int,
+                      path: String,
+                      callback: (String?, String?) -> Unit) {
+        thread {
+            val url = "$HOST/albums/$albumId/image-upload"
+
+            val maxLength = 1200F
+            val originBitmap = BitmapFactory.decodeFile(path)
+            val resizeRatio = Math.max(maxLength / originBitmap.width, maxLength / originBitmap.height)
+            val resizedBitmap = if (resizeRatio < 1) {
+                Bitmap.createScaledBitmap(
+                        originBitmap,
+                        (originBitmap.width * resizeRatio).toInt(),
+                        (originBitmap.height * resizeRatio).toInt(),
+                        false
+                )
+            } else {
+                originBitmap
+            }
+
+            val stream = ByteArrayOutputStream()
+            resizedBitmap.compress(Bitmap.CompressFormat.JPEG, 90, stream)
+            val byteArray = stream.toByteArray()
+
+            originBitmap.takeIf { !it.isRecycled }?.recycle()
+            resizedBitmap.takeIf { !it.isRecycled }?.recycle()
+
+            val body = RequestBody.create(JPEG, byteArray)
+            val request = Request.Builder().url(url).post(body).build()
+            val response = client.newCall(request).execute()
+            val code = response.code()
+            val string = response.body()?.string()
+            val json = JSONObject(string)
+            println("<HTTP IMAGE> $string")
+
+            handler.post {
+                when (code) {
+                    200 -> callback(json.getString("url"), null)
+                    else -> callback(null, json.getString("msg"))
+                }
             }
         }
     }

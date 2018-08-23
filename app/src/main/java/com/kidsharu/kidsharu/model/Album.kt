@@ -49,3 +49,11 @@ open class Album(
         }
     }
 }
+
+@Suppress("EnumEntryName")
+enum class AlbumStatus {
+    uploading,
+    processing,
+    checking,
+    done;
+}
