@@ -17,8 +17,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         setSupportActionBar(toolbar)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        toolbar_title.text = "로그인"
 
         login_button.setOnClickListener { loginBtnClicked() }
         register_teacher.setOnClickListener { ActivityUtil.registerTeacher(this) }
@@ -30,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
         val pw = pw_field.text.toString()
         LoadingDialogHelper.show(this)
 
-        if (teacher_radio.isChecked)
+//        if (teacher_radio.isChecked)
             ServerClient.teacherLogin(id, pw) { errMsg ->
                 LoadingDialogHelper.dismiss()
                 if (errMsg != null) {
@@ -41,16 +39,16 @@ class LoginActivity : AppCompatActivity() {
                 finish()
                 ActivityUtil.teacherHome(this)
             }
-        else
-            ServerClient.parentLogin(id, pw) { errMsg ->
-                LoadingDialogHelper.dismiss()
-                if (errMsg != null) {
-                    Toast.makeText(this, errMsg, Toast.LENGTH_SHORT).show()
-                    return@parentLogin
-                }
-
-                finish()
-                ActivityUtil.parentHome(this)
-            }
+//        else
+//            ServerClient.parentLogin(id, pw) { errMsg ->
+//                LoadingDialogHelper.dismiss()
+//                if (errMsg != null) {
+//                    Toast.makeText(this, errMsg, Toast.LENGTH_SHORT).show()
+//                    return@parentLogin
+//                }
+//
+//                finish()
+//                ActivityUtil.parentHome(this)
+//            }
     }
 }
