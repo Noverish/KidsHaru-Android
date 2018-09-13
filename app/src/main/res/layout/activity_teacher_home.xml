@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
+    <include layout="@layout/toolbar_teacher_home" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,7 +14,13 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/album_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="match_parent"
+            android:background="#f4f4f4"
+            android:clipToPadding="false"
+            android:paddingBottom="27dp"
+            android:paddingEnd="11dp"
+            android:paddingStart="11dp"
+            android:paddingTop="27dp" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/album_add_btn"

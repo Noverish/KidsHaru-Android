@@ -1,7 +1,10 @@
 package com.kidsharu.kidsharu.other
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.os.Build
 import android.os.Handler
 import android.view.View
 import android.view.Window
@@ -28,6 +31,18 @@ object ActivityUtil {
         window.decorView.setOnSystemUiVisibilityChangeListener {  visibility ->
             if (visibility and View.SYSTEM_UI_FLAG_FULLSCREEN == 0) {
                 Handler().postDelayed({ setFullScreen(window) }, 4000)
+            }
+        }
+    }
+
+    fun setStatusBarColor(activity: Activity, color: Int, isLightBackground: Boolean) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            activity.window.statusBarColor = color
+            val flag = activity.window.decorView.systemUiVisibility
+            activity.window.decorView.systemUiVisibility = if (isLightBackground) {
+                flag or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            } else {
+                flag and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
             }
         }
     }

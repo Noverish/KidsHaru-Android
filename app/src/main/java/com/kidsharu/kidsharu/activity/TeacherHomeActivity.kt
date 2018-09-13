@@ -1,5 +1,6 @@
 package com.kidsharu.kidsharu.activity
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
@@ -17,13 +18,13 @@ class TeacherHomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_teacher_home)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        toolbar_title.text = "앨범 리스트"
+        ActivityUtil.setStatusBarColor(this, Color.WHITE, true)
 
         album_add_btn.setOnClickListener { ActivityUtil.albumAdd(this) }
 
         album_recycler_view.adapter = AlbumRecyclerAdapter(emptyArray())
         album_recycler_view.layoutManager = GridLayoutManager(this, 2)
-        album_recycler_view.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
+        album_recycler_view.addItemDecoration(GridSpacingItemDecoration(2, 12, true))
 
         ServerClient.teacherAlbumList { albums, errMsg ->
             album_recycler_view.adapter = AlbumRecyclerAdapter(albums)

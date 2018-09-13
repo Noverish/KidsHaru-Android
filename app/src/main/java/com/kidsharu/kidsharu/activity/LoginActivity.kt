@@ -1,6 +1,7 @@
 package com.kidsharu.kidsharu.activity
 
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
 import android.widget.Toast
@@ -17,6 +18,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
         setSupportActionBar(toolbar)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        ActivityUtil.setStatusBarColor(this, ContextCompat.getColor(this, R.color.yellow1), true)
 
         login_button.setOnClickListener { loginBtnClicked() }
         register_teacher.setOnClickListener { ActivityUtil.registerTeacher(this) }
