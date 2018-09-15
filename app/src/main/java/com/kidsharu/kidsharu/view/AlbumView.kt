@@ -27,11 +27,11 @@ class AlbumView : FrameLayout, View.OnClickListener {
     fun setAlbum(album: Album) {
         this.album = album
 
-        Picasso.get().load(album.coverImgUrl).into(cover_image_view_1)
-        Picasso.get().load(album.coverImgUrl).into(cover_image_view_2)
-        Picasso.get().load(album.coverImgUrl).into(cover_image_view_3)
-        Picasso.get().load(album.coverImgUrl).into(cover_image_view_4)
-        Picasso.get().load(album.coverImgUrl).into(cover_image_view_5)
+        album.pictureUrls.getOrNull(0)?.let { Picasso.get().load(it).into(cover_image_view_1) }
+        album.pictureUrls.getOrNull(1)?.let { Picasso.get().load(it).into(cover_image_view_2) }
+        album.pictureUrls.getOrNull(2)?.let { Picasso.get().load(it).into(cover_image_view_3) }
+        album.pictureUrls.getOrNull(3)?.let { Picasso.get().load(it).into(cover_image_view_4) }
+        album.pictureUrls.getOrNull(4)?.let { Picasso.get().load(it).into(cover_image_view_5) }
         title_label.text = album.title
         date_label.text = album.date
     }

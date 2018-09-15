@@ -1,9 +1,6 @@
 package com.kidsharu.kidsharu.other
 
-import android.util.Base64
-import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
 
 object CryptoUtil {
     fun sha256(s: String): String {

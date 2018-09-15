@@ -28,6 +28,7 @@ object ServerClient {
     private var accessToken = ""
     private var teacherId = 0
     private var parentId = 0
+    var isTeacher: Boolean = false; private set
 
     private fun request(parameter: String, path: String, method: Method, callback: (Int, JSONObject, JSONArray) -> Unit) {
         thread {
@@ -116,10 +117,10 @@ object ServerClient {
         }
     }
 
-    fun teacherLogin(id: String,
-                     password: String,
-                     callback: (String?) -> Unit) {
-        val path = "/teachers/auth"
+    fun login(id: String,
+              password: String,
+              callback: (String?) -> Unit) {
+        val path = "/auth"
         val parameter = JSONObject().apply {
             put("id", id)
             put("password", CryptoUtil.sha256(password))
@@ -129,28 +130,11 @@ object ServerClient {
             when (code) {
                 200 -> {
                     accessToken = json.getString("access_token")
-                    teacherId = json.getInt("teacher_id")
-                    callback(null)
-                }
-                else -> callback(json.getString("msg"))
-            }
-        }
-    }
-
-    fun parentLogin(id: String,
-                    password: String,
-                    callback: (String?) -> Unit) {
-        val path = "/parents/auth"
-        val parameter = JSONObject().apply {
-            put("id", id)
-            put("password", CryptoUtil.sha256(password))
-        }.toString()
-
-        request(parameter, path, Method.POST) { code, json, _ ->
-            when (code) {
-                200 -> {
-                    accessToken = json.getString("access_token")
-                    parentId = json.getInt("parent_id")
+                    isTeacher = json.getBoolean("is_teacher")
+                    if (isTeacher)
+                        teacherId = json.getInt("teacher_id")
+                    else
+                        parentId = json.getInt("parent_id")
                     callback(null)
                 }
                 else -> callback(json.getString("msg"))

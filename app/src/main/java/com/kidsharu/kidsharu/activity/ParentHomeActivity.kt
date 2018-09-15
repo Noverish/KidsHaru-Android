@@ -1,14 +1,14 @@
 package com.kidsharu.kidsharu.activity
 
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
-import android.view.MenuItem
 import com.kidsharu.kidsharu.R
+import com.kidsharu.kidsharu.other.ActivityUtil
 import com.kidsharu.kidsharu.other.GridSpacingItemDecoration
 import com.kidsharu.kidsharu.other.ServerClient
 import com.kidsharu.kidsharu.recylcer_view.AlbumRecyclerAdapter
@@ -22,10 +22,19 @@ class ParentHomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_parent_home)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        toolbar_title.text = "내 아이 앨범"
+        ActivityUtil.setStatusBarColor(this, Color.WHITE, true)
 
         val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
+        toggle.isDrawerIndicatorEnabled = false
+        toggle.setHomeAsUpIndicator(R.drawable.icon_hamberger)
+        toggle.setToolbarNavigationClickListener {
+            if (drawer_layout.isDrawerVisible(GravityCompat.START)) {
+                drawer_layout.closeDrawer(GravityCompat.START)
+            } else {
+                drawer_layout.openDrawer(GravityCompat.START)
+            }
+        }
         toggle.syncState()
 
         album_recycler_view.adapter = AlbumRecyclerAdapter(emptyArray())

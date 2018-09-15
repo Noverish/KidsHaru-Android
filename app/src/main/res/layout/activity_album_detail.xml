@@ -4,45 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/album_cover_image_view"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:scaleType="centerCrop" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="공유한 시각" />
-
-            <TextView
-                android:id="@+id/shared_date_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="이 앨범에 있는 원아 수" />
-
-            <TextView
-                android:id="@+id/children_num_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </LinearLayout>
+    <include layout="@layout/toolbar_album_detail" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/album_recycler_view"

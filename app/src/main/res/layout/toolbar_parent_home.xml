@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
-            android:text="@string/teacher_home_title"
+            android:text="@string/parent_home_title"
             android:textColor="#2a2a2a"
             android:textSize="16sp"
             android:textStyle="normal" />
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
-            android:text="@string/teacher_home_sub_title"
+            android:text="@string/parent_home_sub_title"
             android:textColor="#2a2a2a"
             android:textSize="14sp"
             android:textStyle="normal" />

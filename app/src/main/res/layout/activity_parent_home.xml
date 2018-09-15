@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/toolbar" />
+        <include layout="@layout/toolbar_parent_home" />
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -23,7 +23,13 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/album_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:background="#f4f4f4"
+                android:clipToPadding="false"
+                android:paddingBottom="27dp"
+                android:paddingEnd="11dp"
+                android:paddingStart="11dp"
+                android:paddingTop="27dp" />
 
         </android.support.constraint.ConstraintLayout>
 
@@ -34,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="false">
 
         <LinearLayout
             android:layout_width="match_parent"

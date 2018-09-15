@@ -30,27 +30,18 @@ class LoginActivity : AppCompatActivity() {
         val pw = pw_field.text.toString()
         LoadingDialogHelper.show(this)
 
-//        if (teacher_radio.isChecked)
-            ServerClient.teacherLogin(id, pw) { errMsg ->
-                LoadingDialogHelper.dismiss()
-                if (errMsg != null) {
-                    Toast.makeText(this, errMsg, Toast.LENGTH_SHORT).show()
-                    return@teacherLogin
-                }
-
-                finish()
-                ActivityUtil.teacherHome(this)
+        ServerClient.login(id, pw) { errMsg ->
+            LoadingDialogHelper.dismiss()
+            if (errMsg != null) {
+                Toast.makeText(this, errMsg, Toast.LENGTH_SHORT).show()
+                return@login
             }
-//        else
-//            ServerClient.parentLogin(id, pw) { errMsg ->
-//                LoadingDialogHelper.dismiss()
-//                if (errMsg != null) {
-//                    Toast.makeText(this, errMsg, Toast.LENGTH_SHORT).show()
-//                    return@parentLogin
-//                }
-//
-//                finish()
-//                ActivityUtil.parentHome(this)
-//            }
+
+            finish()
+            if (ServerClient.isTeacher)
+                ActivityUtil.teacherHome(this)
+            else
+                ActivityUtil.parentHome(this)
+        }
     }
 }

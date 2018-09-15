@@ -9,14 +9,20 @@
 
     <ImageView
         android:id="@+id/profile_image_view"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_margin="20dp" />
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="19dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="19dp" />
 
     <TextView
         android:id="@+id/name_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        tools:text="홍길동" />
+        android:layout_marginStart="25dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#2a2a2a"
+        android:textSize="13sp"
+        android:textStyle="normal"
+        tools:text="홍길동 7세" />
 </LinearLayout>
