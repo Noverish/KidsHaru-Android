@@ -1,6 +1,5 @@
 package com.kidsharu.kidsharu.dialog
 
-import android.R
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
@@ -36,7 +35,7 @@ private class LoadingDialog(context: Context,
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        val progressBar = ProgressBar(context, null, R.attr.progressBarStyleLarge)
+        val progressBar = ProgressBar(context, null, android.R.attr.progressBarStyleLarge)
         progressBar.layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT)
         (progressBar.layoutParams as FrameLayout.LayoutParams).gravity = Gravity.CENTER
 

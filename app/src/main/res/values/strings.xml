@@ -2,6 +2,7 @@
     <string name="app_name">KidsHaru</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="splash">splash</string>
 
     <string name="id">아이디</string>
     <string name="pw">패스워드</string>

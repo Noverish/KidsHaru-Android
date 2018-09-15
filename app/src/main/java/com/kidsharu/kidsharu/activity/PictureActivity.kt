@@ -35,7 +35,7 @@ class PictureActivity : AppCompatActivity() {
             }
 
             override fun onPageSelected(position: Int) {
-                now_page_label.text = "${position + 1}"
+                now_page_label.text = (position + 1).toString()
             }
 
             override fun onPageScrollStateChanged(state: Int) {
