@@ -8,7 +8,7 @@ import com.kidsharu.kidsharu.R
 import com.kidsharu.kidsharu.other.ActivityUtil
 import com.kidsharu.kidsharu.other.GridSpacingItemDecoration
 import com.kidsharu.kidsharu.other.ServerClient
-import com.kidsharu.kidsharu.recylcer_view.AlbumRecyclerAdapter
+import com.kidsharu.kidsharu.recyclerView.AlbumRecyclerAdapter
 import kotlinx.android.synthetic.main.activity_teacher_home.*
 import kotlinx.android.synthetic.main.toolbar.*
 

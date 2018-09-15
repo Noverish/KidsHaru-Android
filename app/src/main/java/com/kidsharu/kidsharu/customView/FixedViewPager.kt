@@ -1,4 +1,4 @@
-package com.kidsharu.kidsharu.custom_view
+package com.kidsharu.kidsharu.customView
 
 import android.content.Context
 import android.support.v4.view.ViewPager

@@ -1,4 +1,4 @@
-package com.kidsharu.kidsharu.view_pager
+package com.kidsharu.kidsharu.viewPager
 
 import android.support.v4.view.PagerAdapter
 import android.view.View

@@ -1,4 +1,4 @@
-package com.kidsharu.kidsharu.recylcer_view
+package com.kidsharu.kidsharu.recyclerView
 
 import android.support.v7.widget.RecyclerView
 import android.view.View

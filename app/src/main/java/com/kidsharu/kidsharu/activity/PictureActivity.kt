@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import com.kidsharu.kidsharu.R
 import com.kidsharu.kidsharu.model.Picture
 import com.kidsharu.kidsharu.other.ActivityUtil
-import com.kidsharu.kidsharu.view_pager.PicturePagerAdapter
+import com.kidsharu.kidsharu.viewPager.PicturePagerAdapter
 import kotlinx.android.synthetic.main.activity_image.*
 
 class PictureActivity : AppCompatActivity() {

@@ -9,7 +9,7 @@ import com.kidsharu.kidsharu.model.Album
 import com.kidsharu.kidsharu.model.Picture
 import com.kidsharu.kidsharu.other.ActivityUtil
 import com.kidsharu.kidsharu.other.GridSpacingItemDecoration
-import com.kidsharu.kidsharu.recylcer_view.PictureRecyclerAdapter
+import com.kidsharu.kidsharu.recyclerView.PictureRecyclerAdapter
 import kotlinx.android.synthetic.main.activity_album_detail.*
 import kotlinx.android.synthetic.main.toolbar_album_detail.*
 

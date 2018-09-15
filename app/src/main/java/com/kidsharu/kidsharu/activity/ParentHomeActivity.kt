@@ -11,8 +11,8 @@ import com.kidsharu.kidsharu.R
 import com.kidsharu.kidsharu.other.ActivityUtil
 import com.kidsharu.kidsharu.other.GridSpacingItemDecoration
 import com.kidsharu.kidsharu.other.ServerClient
-import com.kidsharu.kidsharu.recylcer_view.AlbumRecyclerAdapter
-import com.kidsharu.kidsharu.recylcer_view.ChildRecyclerAdapter
+import com.kidsharu.kidsharu.recyclerView.AlbumRecyclerAdapter
+import com.kidsharu.kidsharu.recyclerView.ChildRecyclerAdapter
 import kotlinx.android.synthetic.main.activity_parent_home.*
 import kotlinx.android.synthetic.main.toolbar.*
 
