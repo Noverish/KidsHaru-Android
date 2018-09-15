@@ -21,6 +21,9 @@ class AlbumView : FrameLayout, View.OnClickListener {
     init {
         View.inflate(context, R.layout.view_album, this)
 
+        setBackgroundResource(R.drawable.background_corner_6_white)
+        elevation = resources.getDimension(R.dimen.album_view_elevation)
+
         setOnClickListener(this)
     }
 

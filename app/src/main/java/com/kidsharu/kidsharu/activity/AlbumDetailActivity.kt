@@ -37,6 +37,6 @@ class AlbumDetailActivity: AppCompatActivity() {
         children_num_label.text = String.format(getString(R.string.number_of_people), 0)
         album_recycler_view.adapter = PictureRecyclerAdapter(pictures)
         album_recycler_view.layoutManager = GridLayoutManager(this, 3)
-        album_recycler_view.addItemDecoration(GridSpacingItemDecoration(3, 4, false))
+        album_recycler_view.addItemDecoration(GridSpacingItemDecoration(3, resources.getDimension(R.dimen.picture_recycler_view_spacing).toInt(), false))
     }
 }

@@ -39,7 +39,7 @@ class ParentHomeActivity : AppCompatActivity() {
 
         album_recycler_view.adapter = AlbumRecyclerAdapter(emptyArray())
         album_recycler_view.layoutManager = GridLayoutManager(this, 2)
-        album_recycler_view.addItemDecoration(GridSpacingItemDecoration(2, 16, true))
+        album_recycler_view.addItemDecoration(GridSpacingItemDecoration(2, resources.getDimension(R.dimen.album_recycler_view_vertical_spacing).toInt(), resources.getDimension(R.dimen.album_recycler_view_horizontal_spacing).toInt(), true))
 
         ServerClient.parentAlbumList { albums, errMsg ->
             errMsg?.let { println(it) }
