@@ -3,10 +3,8 @@ package com.kidsharu.kidsharu.activity
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
 import com.kidsharu.kidsharu.R
 import com.kidsharu.kidsharu.other.ActivityUtil
-import com.kidsharu.kidsharu.other.GridSpacingItemDecoration
 import com.kidsharu.kidsharu.other.ServerClient
 import com.kidsharu.kidsharu.recyclerView.AlbumRecyclerAdapter
 import kotlinx.android.synthetic.main.activity_teacher_home.*
@@ -22,10 +20,7 @@ class TeacherHomeActivity : AppCompatActivity() {
 
         album_add_btn.setOnClickListener { ActivityUtil.albumAdd(this) }
 
-        album_recycler_view.adapter = AlbumRecyclerAdapter(emptyArray())
-        album_recycler_view.layoutManager = GridLayoutManager(this, 2)
-        album_recycler_view.addItemDecoration(GridSpacingItemDecoration(2, resources.getDimension(R.dimen.album_recycler_view_vertical_spacing).toInt(), resources.getDimension(R.dimen.album_recycler_view_horizontal_spacing).toInt(), true))
-
+        // TODO pull to refresh
         ServerClient.teacherAlbumList { albums, errMsg ->
             album_recycler_view.adapter = AlbumRecyclerAdapter(albums)
             errMsg?.let { println(it) }

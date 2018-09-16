@@ -5,11 +5,9 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import com.kidsharu.kidsharu.R
 import com.kidsharu.kidsharu.other.ActivityUtil
-import com.kidsharu.kidsharu.other.GridSpacingItemDecoration
 import com.kidsharu.kidsharu.other.ServerClient
 import com.kidsharu.kidsharu.recyclerView.AlbumRecyclerAdapter
 import com.kidsharu.kidsharu.recyclerView.ChildRecyclerAdapter
@@ -37,10 +35,7 @@ class ParentHomeActivity : AppCompatActivity() {
         }
         toggle.syncState()
 
-        album_recycler_view.adapter = AlbumRecyclerAdapter(emptyArray())
-        album_recycler_view.layoutManager = GridLayoutManager(this, 2)
-        album_recycler_view.addItemDecoration(GridSpacingItemDecoration(2, resources.getDimension(R.dimen.album_recycler_view_vertical_spacing).toInt(), resources.getDimension(R.dimen.album_recycler_view_horizontal_spacing).toInt(), true))
-
+        // TODO pull to refresh
         ServerClient.parentAlbumList { albums, errMsg ->
             errMsg?.let { println(it) }
             album_recycler_view.adapter = AlbumRecyclerAdapter(albums)
