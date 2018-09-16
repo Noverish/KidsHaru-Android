@@ -3,20 +3,21 @@ package com.kidsharu.kidsharu.viewPager
 import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
-import com.squareup.picasso.Picasso
-import com.github.chrisbanes.photoview.PhotoView
 import com.kidsharu.kidsharu.model.Picture
+import com.kidsharu.kidsharu.view.PictureView2
+import io.reactivex.subjects.BehaviorSubject
 
 class PicturePagerAdapter(
-        private val pictures: Array<Picture>
+        private val pictures: Array<Picture>,
+        private val isFaceMode: BehaviorSubject<Boolean>? = null
 ) : PagerAdapter() {
 
-    // TODO View holder Pattern
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val imageView = PhotoView(container.context)
-        container.addView(imageView)
-        Picasso.get().load(pictures[position].pictureUrl).into(imageView)
-        return imageView
+        return PictureView2(container.context).also { imageView ->
+            imageView.setPicture(pictures[position])
+            imageView.setFaceMode(isFaceMode)
+            container.addView(imageView)
+        }
     }
 
     override fun getCount(): Int {

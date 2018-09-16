@@ -18,7 +18,7 @@ class AlbumRecyclerView : RecyclerView {
 
     init {
         adapter = AlbumRecyclerAdapter(emptyArray())
-        GridLayoutManager(context, 2)
+        layoutManager = GridLayoutManager(context, 2)
         addItemDecoration(GridSpacingItemDecoration(
                 spanCount = 2,
                 verticalSpacing = resources.getDimension(R.dimen.album_recycler_view_vertical_spacing).toInt(),

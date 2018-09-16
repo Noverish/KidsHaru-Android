@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.kidsharu.kidsharu.model.Picture
 import com.kidsharu.kidsharu.other.ActivityUtil
+import com.kidsharu.kidsharu.other.ServerClient
 import com.kidsharu.kidsharu.view.PictureView
 
 class PictureRecyclerAdapter(
@@ -34,7 +35,10 @@ class PictureRecyclerAdapter(
         val picture = view.getPicture() ?: return
         val position = pictures.indexOf(picture)
 
-        ActivityUtil.pictureDetail(view.context, pictures, position)
+        if (ServerClient.isTeacher)
+            ActivityUtil.teacherPicture(view.context, pictures, position)
+        else
+            ActivityUtil.pictureDetail(view.context, pictures, position)
     }
 }
 

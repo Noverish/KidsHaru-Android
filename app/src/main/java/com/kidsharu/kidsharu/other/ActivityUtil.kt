@@ -27,7 +27,7 @@ object ActivityUtil {
             tmp = tmp or flag
         window.decorView.systemUiVisibility = tmp
 
-        window.decorView.setOnSystemUiVisibilityChangeListener {  visibility ->
+        window.decorView.setOnSystemUiVisibilityChangeListener { visibility ->
             if (visibility and View.SYSTEM_UI_FLAG_FULLSCREEN == 0) {
                 Handler().postDelayed({ setFullScreen(window) }, 4000)
             }
@@ -95,6 +95,17 @@ object ActivityUtil {
             intent.putExtra(PictureActivity.POSITION_INTENT_KEY, it)
         }
         intent.putExtra(PictureActivity.PICTURES_INTENT_KEY, pictures)
+        context.startActivity(intent)
+    }
+
+    fun teacherPicture(context: Context,
+                       pictures: Array<Picture>,
+                       nowPage: Int? = null) {
+        val intent = Intent(context, TeacherPictureActivity::class.java)
+        nowPage?.let {
+            intent.putExtra(TeacherPictureActivity.POSITION_INTENT_KEY, it)
+        }
+        intent.putExtra(TeacherPictureActivity.PICTURES_INTENT_KEY, pictures)
         context.startActivity(intent)
     }
 }

@@ -29,6 +29,7 @@
         <activity android:name=".activity.AlbumDetailActivity" />
         <activity android:name=".activity.PictureActivity" />
         <activity android:name=".activity.AlbumAddActivity" />
+        <activity android:name=".activity.TeacherPictureActivity" />
     </application>
 
 </manifest>

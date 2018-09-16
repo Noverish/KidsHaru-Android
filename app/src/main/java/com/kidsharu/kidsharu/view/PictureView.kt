@@ -9,7 +9,7 @@ import com.kidsharu.kidsharu.model.Picture
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.view_picture.view.*
 
-class PictureView: FrameLayout {
+class PictureView : FrameLayout {
 
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)

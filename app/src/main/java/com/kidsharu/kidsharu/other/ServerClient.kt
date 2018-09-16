@@ -3,10 +3,7 @@ package com.kidsharu.kidsharu.other
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Handler
-import com.kidsharu.kidsharu.model.Album
-import com.kidsharu.kidsharu.model.AlbumStatus
-import com.kidsharu.kidsharu.model.Child
-import com.kidsharu.kidsharu.model.Picture
+import com.kidsharu.kidsharu.model.*
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -301,6 +298,24 @@ object ServerClient {
                     200 -> callback(json.getString("url"), null)
                     else -> callback(null, json.getString("msg"))
                 }
+            }
+        }
+    }
+
+    // face
+    fun faceList(albumId: Int,
+                 pictureId: Int,
+                 callback: (Array<Face>, String?) -> Unit) {
+        val path = "/albums/$albumId/pictures/$pictureId/children"
+        val parameter = ""
+
+        request(parameter, path, Method.GET) { code, json, array ->
+            when (code) {
+                200 -> {
+                    val faceArray = Array(array.length()) { Face(array.getJSONObject(it)) }
+                    callback(faceArray, null)
+                }
+                else -> callback(emptyArray(), json.getString("msg"))
             }
         }
     }
