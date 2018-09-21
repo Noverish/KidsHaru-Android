@@ -4,7 +4,7 @@ import android.support.v4.view.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
 import com.kidsharu.kidsharu.model.Picture
-import com.kidsharu.kidsharu.view.PictureView2
+import com.kidsharu.kidsharu.view.PictureViewForTeacher
 import io.reactivex.subjects.BehaviorSubject
 
 class PicturePagerAdapter(
@@ -13,7 +13,7 @@ class PicturePagerAdapter(
 ) : PagerAdapter() {
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        return PictureView2(container.context).also { imageView ->
+        return PictureViewForTeacher(container.context).also { imageView ->
             imageView.setPicture(pictures[position])
             imageView.setFaceMode(isFaceMode)
             container.addView(imageView)

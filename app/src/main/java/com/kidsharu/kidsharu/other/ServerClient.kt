@@ -155,6 +155,21 @@ object ServerClient {
         }
     }
 
+    fun teacherChildList(callback: (Array<Child>, String?) -> Unit) {
+        val path = "/teachers/$teacherId/children"
+        val parameter = ""
+
+        request(parameter, path, Method.GET) { code, json, array ->
+            when (code) {
+                200 -> {
+                    val childArray = Array(array.length()) { Child(array.getJSONObject(it)) }
+                    callback(childArray, null)
+                }
+                else -> callback(emptyArray(), json.getString("msg"))
+            }
+        }
+    }
+
     // album
     fun teacherAlbumList(callback: (Array<Album>, String?) -> Unit) {
         val path = "/teachers/$teacherId/albums"
@@ -316,6 +331,44 @@ object ServerClient {
                     callback(faceArray, null)
                 }
                 else -> callback(emptyArray(), json.getString("msg"))
+            }
+        }
+    }
+
+    fun faceDetail(albumId: Int,
+                   pictureId: Int,
+                   childId: Int,
+                   callback: (Face?, String?) -> Unit) {
+        val path = "/albums/$albumId/pictures/$pictureId/children/$childId"
+        val parameter = ""
+
+        request(parameter, path, Method.GET) { code, json, _ ->
+            when (code) {
+                200 -> {
+                    callback(Face(json), null)
+                }
+                else -> callback(null, json.getString("msg"))
+            }
+        }
+
+    }
+
+    fun faceModify(albumId: Int,
+                   pictureId: Int,
+                   childId: Int,
+                   toChildId: Int? = null,
+                   callback: (String?) -> Unit) {
+        val path = "/albums/$albumId/pictures/$pictureId/children/$childId"
+        val parameter = JSONObject().apply {
+            if (toChildId != null) put("child_id", toChildId)
+        }.toString()
+
+        request(parameter, path, Method.PUT) { code, json, _ ->
+            when (code) {
+                204 -> {
+                    callback(null)
+                }
+                else -> callback(json.getString("msg"))
             }
         }
     }

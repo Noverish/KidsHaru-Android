@@ -7,9 +7,9 @@ import com.kidsharu.kidsharu.model.Child
 import com.kidsharu.kidsharu.view.ChildView
 
 class ChildRecyclerAdapter(
-        private val children: Array<Child>
+        private val children: Array<Child>,
+        private var selectedIndex: Int = 0
 ) : RecyclerView.Adapter<ChildPreviewHolder>() {
-    private var selectedIndex = 0
     var itemTouchCallback: ((Child) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildPreviewHolder {
