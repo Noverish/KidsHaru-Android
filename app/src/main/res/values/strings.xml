@@ -14,6 +14,9 @@
     <string name="register">회원가입</string>
     <string name="register_as_teacher">교사로 회원가입</string>
     <string name="register_as_parent">학부모로 회원가입</string>
+    <string name="register_as_parent_success">학부모로 회원가입 성공</string>
+    <string name="register_as_teacher_success">교사로 회원가입 성공</string>
+    <string name="pw_confirm_not_match">입력하신 비밀번호가 서로 다릅니다</string>
     <string name="number_of_people">%d 명</string>
     <string name="enter_album_name">만들 앨범의 이름을 입력해 주세요</string>
     <string name="album_title">앨범 제목</string>

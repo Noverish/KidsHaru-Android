@@ -15,7 +15,7 @@ class RegisterParentActivity: AppCompatActivity() {
         setContentView(R.layout.activity_register)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        toolbar_title.text = "학부모로 회원가입"
+        toolbar_title.text = getString(R.string.register_as_parent)
 
         name_field.visibility = View.GONE
         register_btn.setOnClickListener { registerBtnClicked() }
@@ -24,12 +24,18 @@ class RegisterParentActivity: AppCompatActivity() {
     private fun registerBtnClicked() {
         val id = id_field.text.toString()
         val pw = pw_field.text.toString()
-        val pwConfirm = pw_confirm_field.text.toString() // TODO pw confirm
+        val pwConfirm = pw_confirm_field.text.toString()
         val inviteCode = invite_code_field.text.toString()
+
+        if (pw != pwConfirm) {
+            Toast.makeText(this, R.string.pw_confirm_not_match, Toast.LENGTH_SHORT).show()
+            return
+        }
 
         ServerClient.parentRegister(id, pw, inviteCode) { errMsg ->
             if (errMsg == null) {
-                Toast.makeText(this, "부모 회원가입 성공", Toast.LENGTH_SHORT).show()
+                // TODO go to home
+                Toast.makeText(this, R.string.register_as_parent_success, Toast.LENGTH_SHORT).show()
             }
         }
     }

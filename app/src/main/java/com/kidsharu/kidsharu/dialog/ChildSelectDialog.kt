@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.dialog_child_select.*
 class ChildSelectDialog(
         context: Context,
         children: Array<Child>,
-        nowSelectedChildId: Int
+        nowSelectedChildId: Int?
 ) : Dialog(context), ChildSelectRecyclerAdapter.OnChildSelectedListener {
     var onChildSelectedListener: ChildSelectDialog.OnChildSelectedListener? = null
 

@@ -15,8 +15,7 @@ class RegisterTeacherActivity: AppCompatActivity() {
         setContentView(R.layout.activity_register)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        toolbar_title.text = "선생님으로 회원가입"
-
+        toolbar_title.text = getString(R.string.register_as_teacher)
         invite_code_field.visibility = View.GONE
         register_btn.setOnClickListener { registerBtnClicked() }
     }
@@ -24,12 +23,18 @@ class RegisterTeacherActivity: AppCompatActivity() {
     private fun registerBtnClicked() {
         val id = id_field.text.toString()
         val pw = pw_field.text.toString()
-        val pwConfirm = pw_confirm_field.text.toString() // TODO pw confirm
+        val pwConfirm = pw_confirm_field.text.toString()
         val name = name_field.text.toString()
+
+        if (pw != pwConfirm) {
+            Toast.makeText(this, R.string.pw_confirm_not_match, Toast.LENGTH_SHORT).show()
+            return
+        }
 
         ServerClient.teacherRegister(id, pw, name) { errMsg ->
             if (errMsg == null) {
-                Toast.makeText(this, "선생 회원가입 성공", Toast.LENGTH_SHORT).show()
+                // TODO go to home
+                Toast.makeText(this, R.string.register_as_teacher_success, Toast.LENGTH_SHORT).show()
             }
         }
     }

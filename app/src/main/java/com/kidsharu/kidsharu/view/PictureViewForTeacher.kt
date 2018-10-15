@@ -20,7 +20,6 @@ import com.squareup.picasso.Picasso
 import io.reactivex.subjects.BehaviorSubject
 
 
-// TODO Change this class name
 class PictureViewForTeacher : FrameLayout, OnMatrixChangedListener {
     constructor(context: Context?) : super(context)
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
@@ -72,7 +71,7 @@ class PictureViewForTeacher : FrameLayout, OnMatrixChangedListener {
     private fun showFaceBox() {
         if (faceBoxes == null) {
             val picture = picture ?: return
-            ServerClient.faceList(picture.albumId, picture.pictureId) { faces, errMsg ->
+            ServerClient.faceList(picture.pictureId) { faces, errMsg ->
                 if (errMsg != null) {
                     CrashUtil.onServerError(context, errMsg)
                     return@faceList

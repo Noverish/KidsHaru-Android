@@ -3,6 +3,7 @@ package com.kidsharu.kidsharu.activity
 import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.view.WindowManager
 import com.kidsharu.kidsharu.R
 import com.kidsharu.kidsharu.model.Picture
 import com.kidsharu.kidsharu.other.ActivityUtil
@@ -25,6 +26,7 @@ class TeacherPictureActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_teacher_picture)
         ActivityUtil.setFullScreen(this.window)
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
         nowPosition = intent.getIntExtra(POSITION_INTENT_KEY, 0)
         pictures = intent.getParcelableArrayExtra(PICTURES_INTENT_KEY).map { it as Picture }.toTypedArray()

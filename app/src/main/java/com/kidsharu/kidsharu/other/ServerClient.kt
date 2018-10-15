@@ -318,10 +318,9 @@ object ServerClient {
     }
 
     // face
-    fun faceList(albumId: Int,
-                 pictureId: Int,
+    fun faceList(pictureId: Int,
                  callback: (Array<Face>, String?) -> Unit) {
-        val path = "/albums/$albumId/pictures/$pictureId/children"
+        val path = "/pictures/$pictureId/faces"
         val parameter = ""
 
         request(parameter, path, Method.GET) { code, json, array ->
@@ -335,11 +334,9 @@ object ServerClient {
         }
     }
 
-    fun faceDetail(albumId: Int,
-                   pictureId: Int,
-                   childId: Int,
+    fun faceDetail(faceId: Int,
                    callback: (Face?, String?) -> Unit) {
-        val path = "/albums/$albumId/pictures/$pictureId/children/$childId"
+        val path = "/faces/$faceId"
         val parameter = ""
 
         request(parameter, path, Method.GET) { code, json, _ ->
@@ -353,14 +350,12 @@ object ServerClient {
 
     }
 
-    fun faceModify(albumId: Int,
-                   pictureId: Int,
-                   childId: Int,
-                   toChildId: Int? = null,
+    fun faceModify(faceId: Int,
+                   childId: Int? = null,
                    callback: (String?) -> Unit) {
-        val path = "/albums/$albumId/pictures/$pictureId/children/$childId"
+        val path = "/faces/$faceId"
         val parameter = JSONObject().apply {
-            if (toChildId != null) put("child_id", toChildId)
+            if (childId != null) put("child_id", childId)
         }.toString()
 
         request(parameter, path, Method.PUT) { code, json, _ ->

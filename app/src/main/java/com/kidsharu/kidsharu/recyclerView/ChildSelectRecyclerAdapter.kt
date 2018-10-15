@@ -8,7 +8,7 @@ import com.kidsharu.kidsharu.view.ChildSelectView
 
 class ChildSelectRecyclerAdapter(
         private val children: Array<Child>,
-        private var nowSelectedChildId: Int = 0
+        private var nowSelectedChildId: Int?
 ) : RecyclerView.Adapter<ChildSelectViewHolder>(), ChildSelectView.OnChildSelectedListener {
     var onChildSelectedListener: ChildSelectRecyclerAdapter.OnChildSelectedListener? = null
 
