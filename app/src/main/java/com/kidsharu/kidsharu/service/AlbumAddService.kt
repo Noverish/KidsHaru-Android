@@ -53,37 +53,37 @@ class AlbumAddService : Service() {
         uploadNum = 0
 
         ServerClient.teacherAlbumAdd(title, content) { album, errMsg ->
-            println("AlbumAddService.teacherAlbumAdd $errMsg")
             if (errMsg != null) {
+                println("AlbumAddService.teacherAlbumAdd $errMsg")
                 handler.post { Toast.makeText(this, errMsg, Toast.LENGTH_SHORT).show() }
                 return@teacherAlbumAdd
             }
 
             val albumId = album?.albumId ?: return@teacherAlbumAdd
-            paths.forEachIndexed { i, path -> uploadPicture(albumId, i + 1, path) }
+            paths.forEach { path -> uploadPicture(albumId, path) }
         }
     }
 
-    private fun uploadPicture(albumId: Int, pictureId: Int, path: String) {
+    private fun uploadPicture(albumId: Int, path: String) {
         ServerClient.pictureUpload(albumId, path) { imageUrl, errMsg ->
-            println("AlbumAddService.pictureUpload $errMsg")
             if (errMsg != null) {
+                println("AlbumAddService.pictureUpload $errMsg")
                 increaseUploadNum()
                 handler.post { Toast.makeText(this, errMsg, Toast.LENGTH_SHORT).show() }
                 return@pictureUpload
             }
 
             if (imageUrl != null)
-                addPictureToAlbum(albumId, pictureId, imageUrl)
+                addPictureToAlbum(albumId, imageUrl)
         }
 
     }
 
-    private fun addPictureToAlbum(albumId: Int, pictureId: Int, imageUrl: String) {
+    private fun addPictureToAlbum(albumId: Int, imageUrl: String) {
         val fileName = imageUrl.split("/").last()
-        ServerClient.albumPictureAdd(albumId, pictureId, fileName) { _, errMsg ->
-            println("AlbumAddService.albumPictureAdd $errMsg")
+        ServerClient.albumPictureAdd(albumId, fileName) { _, errMsg ->
             if (errMsg != null) {
+                println("AlbumAddService.albumPictureAdd $errMsg")
                 handler.post { Toast.makeText(this, errMsg, Toast.LENGTH_SHORT).show() }
             }
 
@@ -95,8 +95,8 @@ class AlbumAddService : Service() {
 
     private fun changeAlbumStatus(albumId: Int) {
         ServerClient.albumModify(albumId, status = AlbumStatus.processing) { errMsg ->
-            println("AlbumAddService.albumModify $errMsg")
             if (errMsg != null) {
+                println("AlbumAddService.albumModify $errMsg")
                 handler.post { Toast.makeText(this, errMsg, Toast.LENGTH_SHORT).show() }
             }
 

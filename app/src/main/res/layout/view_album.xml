@@ -8,8 +8,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/title_label"
@@ -30,10 +29,12 @@
             android:id="@+id/date_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:fontFamily="sans-serif-light"
             android:textColor="#2a2a2a"
             android:textSize="12sp"
             android:textStyle="normal"
+            app:layout_constraintBottom_toTopOf="@id/cover_image_view_1"
             app:layout_constraintStart_toStartOf="@id/title_label"
             app:layout_constraintTop_toBottomOf="@id/title_label"
             tools:text="2018/08/25" />
@@ -56,7 +57,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toStartOf="@id/cover_image_layout"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date_label" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/cover_image_layout"
@@ -113,5 +115,21 @@
                 app:layout_constraintStart_toEndOf="@id/cover_image_view_4"
                 app:layout_constraintTop_toBottomOf="@id/cover_image_view_3" />
         </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/status_label"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#90000000"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/cover_image_view_1"
+            app:layout_constraintEnd_toEndOf="@id/cover_image_layout"
+            app:layout_constraintStart_toStartOf="@id/cover_image_view_1"
+            app:layout_constraintTop_toTopOf="@id/cover_image_view_1" />
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

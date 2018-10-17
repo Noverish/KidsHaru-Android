@@ -256,12 +256,10 @@ object ServerClient {
     }
 
     fun albumPictureAdd(albumId: Int,
-                        pictureId: Int,
                         fileName: String,
                         callback: (Picture?, String?) -> Unit) {
         val path = "/albums/$albumId/pictures"
         val parameter = JSONObject().apply {
-            put("picture_id", pictureId)
             put("file_name", fileName)
         }.toString()
 

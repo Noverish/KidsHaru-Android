@@ -9,11 +9,10 @@ open class Album(
         val title: String,
         val content: String,
         val date: String,
-        val status: AlbumStatus,
-        val pictureUrls: Array<String>
+        val status: AlbumStatus
 ) : Parcelable {
     override fun toString(): String {
-        return "Album(albumId=$albumId, title='$title', content='$content', date='$date', status='$status', pictureUrls='${pictureUrls.joinToString()}')"
+        return "Album(albumId=$albumId, title='$title', content='$content', date='$date', status='$status')"
     }
 
     constructor(json: JSONObject) : this(
@@ -21,12 +20,7 @@ open class Album(
             json.getString("title"),
             json.getString("content"),
             json.getString("date"),
-            AlbumStatus.valueOf(json.getString("status")),
-            json.getJSONArray("pictures").let { array ->
-                Array<String>(array.length()) { i ->
-                    array.getString(i)
-                }
-            }
+            AlbumStatus.valueOf(json.getString("status"))
     )
 
     constructor(source: Parcel) : this(
@@ -34,8 +28,7 @@ open class Album(
             source.readString(),
             source.readString(),
             source.readString(),
-            AlbumStatus.valueOf(source.readString()),
-            source.createStringArray()
+            AlbumStatus.valueOf(source.readString())
     )
 
     override fun describeContents() = 0
@@ -46,7 +39,6 @@ open class Album(
         writeString(content)
         writeString(date)
         writeString(status.toString())
-        writeStringArray(pictureUrls)
     }
 
     companion object {

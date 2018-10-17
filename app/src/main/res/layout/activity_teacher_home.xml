@@ -22,13 +22,13 @@
             android:paddingStart="11dp"
             android:paddingTop="27dp" />
 
-        <android.support.design.widget.FloatingActionButton
+        <Button
             android:id="@+id/album_add_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
             android:layout_margin="@dimen/fab_margin"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@android:drawable/ic_input_add" />
+            android:background="@drawable/btn_floating" />
     </android.support.constraint.ConstraintLayout>
 </LinearLayout>

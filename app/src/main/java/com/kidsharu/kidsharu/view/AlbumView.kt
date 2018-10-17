@@ -6,7 +6,9 @@ import android.view.View
 import android.widget.FrameLayout
 import com.kidsharu.kidsharu.R
 import com.kidsharu.kidsharu.model.Album
+import com.kidsharu.kidsharu.model.AlbumStatus
 import com.kidsharu.kidsharu.other.ActivityUtil
+import com.kidsharu.kidsharu.other.ServerClient
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.view_album.view.*
 
@@ -30,13 +32,26 @@ class AlbumView : FrameLayout, View.OnClickListener {
     fun setAlbum(album: Album) {
         this.album = album
 
-        album.pictureUrls.getOrNull(0)?.let { Picasso.get().load(it).into(cover_image_view_1) }
-        album.pictureUrls.getOrNull(1)?.let { Picasso.get().load(it).into(cover_image_view_2) }
-        album.pictureUrls.getOrNull(2)?.let { Picasso.get().load(it).into(cover_image_view_3) }
-        album.pictureUrls.getOrNull(3)?.let { Picasso.get().load(it).into(cover_image_view_4) }
-        album.pictureUrls.getOrNull(4)?.let { Picasso.get().load(it).into(cover_image_view_5) }
+        ServerClient.albumPictureList(album.albumId) { pictures, errMsg ->
+            val pictureUrls = pictures.map { it -> it.pictureUrl }
+
+            pictureUrls.getOrNull(0)?.let { Picasso.get().load(it).into(cover_image_view_1) }
+            pictureUrls.getOrNull(1)?.let { Picasso.get().load(it).into(cover_image_view_2) }
+            pictureUrls.getOrNull(2)?.let { Picasso.get().load(it).into(cover_image_view_3) }
+            pictureUrls.getOrNull(3)?.let { Picasso.get().load(it).into(cover_image_view_4) }
+            pictureUrls.getOrNull(4)?.let { Picasso.get().load(it).into(cover_image_view_5) }
+        }
+
         title_label.text = album.title
         date_label.text = album.date
+
+        status_label.visibility = if (album.status == AlbumStatus.done) View.GONE else View.VISIBLE
+        status_label.text = when(album.status) {
+            AlbumStatus.uploading -> "업로드 중"
+            AlbumStatus.processing -> "처리 중"
+            AlbumStatus.checking -> "검토 필요"
+            else -> ""
+        }
     }
 
     override fun onClick(p0: View?) {

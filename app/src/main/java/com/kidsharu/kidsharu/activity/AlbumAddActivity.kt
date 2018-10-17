@@ -1,14 +1,16 @@
 package com.kidsharu.kidsharu.activity
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
 import com.esafirm.imagepicker.features.ImagePicker
 import com.kidsharu.kidsharu.R
+import com.kidsharu.kidsharu.other.ActivityUtil
 import com.kidsharu.kidsharu.service.AlbumAddService
 import kotlinx.android.synthetic.main.activity_album_add.*
-import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.toolbar_album_add.*
 
 class AlbumAddActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,7 +19,7 @@ class AlbumAddActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-        toolbar_title.text = "앨범 만들기"
+        ActivityUtil.setStatusBarColor(this, Color.WHITE, true)
 
         confirm_button.setOnClickListener {
             ImagePicker.create(this).folderMode(true).start()

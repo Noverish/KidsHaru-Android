@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/toolbar" />
+    <include layout="@layout/toolbar_album_add" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,18 +16,56 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginStart="60dp"
             android:layout_marginEnd="60dp"
+            android:layout_marginStart="60dp"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:textColor="#2a2a2a"
+                android:textSize="16sp"
+                android:text="@string/enter_album_name" />
+
+            <EditText
+                android:id="@+id/album_title_field"
+                android:layout_width="266dp"
+                android:layout_height="39dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/background_corner_19_gray"
+                android:gravity="center"
+                android:textColor="#2a2a2a"
+                android:textSize="14sp"
+                android:hint="@string/album_title" />
+
+            <EditText
+                android:id="@+id/album_content_field"
+                android:layout_width="266dp"
+                android:layout_height="39dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/background_corner_19_gray"
+                android:gravity="center"
+                android:textColor="#2a2a2a"
+                android:textSize="14sp"
+                android:hint="@string/album_content" />
+
+            <Button
+                android:id="@+id/confirm_button"
+                android:layout_width="247dp"
+                android:layout_height="53dp"
+                android:background="@drawable/btn_album_add" />
+
+
+            <!--<TextView
                 android:id="@+id/description_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="@string/enter_album_name" />
+                android:text="@string/enter_album_name" />-->
 
-            <android.support.constraint.ConstraintLayout
+            <!--<android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -73,13 +112,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/album_content_label"
                     app:layout_constraintTop_toBottomOf="@id/album_title_label" />
-            </android.support.constraint.ConstraintLayout>
-
-            <Button
-                android:id="@+id/confirm_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/confirm" />
+            </android.support.constraint.ConstraintLayout>-->
 
         </LinearLayout>
     </RelativeLayout>

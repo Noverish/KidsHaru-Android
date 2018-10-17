@@ -18,7 +18,7 @@
     <string name="register_as_teacher_success">교사로 회원가입 성공</string>
     <string name="pw_confirm_not_match">입력하신 비밀번호가 서로 다릅니다</string>
     <string name="number_of_people">%d 명</string>
-    <string name="enter_album_name">만들 앨범의 이름을 입력해 주세요</string>
+    <string name="enter_album_name">이번 추억에 이름을 입력해주세요</string>
     <string name="album_title">앨범 제목</string>
     <string name="album_content">앨범 내용</string>
     <string name="confirm">확인</string>
@@ -31,4 +31,7 @@
 
     <string name="parent_home_nav_title_1">보검맘님 안녕하세요</string>
     <string name="parent_home_nav_title_2">아이들은 오늘 어떤 하루를 보냈을까요?</string>
+
+    <string name="share_title">공유하기</string>
+    <string name="share_sub_title">아이들의 예쁜 모습을 공유합니다.</string>
 </resources>
