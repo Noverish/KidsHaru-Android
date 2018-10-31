@@ -4,5 +4,15 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="transparent">#00000000</color>
     <color name="yellow1">#fde576</color>
+    <color name="red1">#ff5c70</color>
+    <color name="cyan1">#17e0f7</color>
+    <color name="grey_f0">#f0f0f0</color>
+    <color name="grey_74">#747474</color>
+
+    <color name="picture_activity_toolbar_color">#00000000</color>
+
+    <color name="ef_colorPrimary" >@color/yellow1</color>
+    <color name="ef_colorPrimaryDark" >@color/yellow1</color>
 </resources>

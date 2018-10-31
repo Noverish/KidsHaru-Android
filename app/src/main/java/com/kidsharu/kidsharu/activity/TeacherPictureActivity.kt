@@ -1,6 +1,8 @@
 package com.kidsharu.kidsharu.activity
 
+import android.os.Build
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -9,7 +11,6 @@ import com.kidsharu.kidsharu.R
 import com.kidsharu.kidsharu.model.Album
 import com.kidsharu.kidsharu.model.AlbumStatus
 import com.kidsharu.kidsharu.model.Picture
-import com.kidsharu.kidsharu.other.ActivityUtil
 import com.kidsharu.kidsharu.viewPager.PicturePagerAdapter
 import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.activity_teacher_picture.*
@@ -30,8 +31,12 @@ class TeacherPictureActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_teacher_picture)
-        ActivityUtil.setFullScreen(this.window)
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
+        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.navigationBarColor = ContextCompat.getColor(this, R.color.picture_activity_toolbar_color)
+            window.statusBarColor = ContextCompat.getColor(this, R.color.picture_activity_toolbar_color)
+        }
 
         nowPosition = intent.getIntExtra(POSITION_INTENT_KEY, 0)
         pictures = intent.getParcelableArrayExtra(PICTURES_INTENT_KEY).map { it as Picture }.toTypedArray()

@@ -2,6 +2,7 @@ package com.kidsharu.kidsharu.view
 
 import android.content.Context
 import android.graphics.Color
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
@@ -13,6 +14,7 @@ import com.kidsharu.kidsharu.dialog.LoadingDialogHelper
 import com.kidsharu.kidsharu.model.Child
 import com.kidsharu.kidsharu.model.Face
 import com.kidsharu.kidsharu.other.CrashUtil
+import com.kidsharu.kidsharu.other.DrawableUtil
 import com.kidsharu.kidsharu.other.ServerClient
 import kotlin.properties.Delegates
 
@@ -27,15 +29,11 @@ class FaceBoxView : LinearLayout, View.OnClickListener, ChildSelectDialog.OnChil
     var face: Face? by Delegates.observable<Face?>(null) { property, old, new ->
         val name = new?.childName?.takeIf { it != "" }
         if (name == null) {
-            nameLabel.text = "???"
-            nameLabel.setTextColor(Color.WHITE)
-            nameLabel.setBackgroundColor(Color.RED)
-            faceBox.setBackgroundResource(R.drawable.background_view_face_box_red)
+            nameLabel.text = "?"
+            faceBox.setBackgroundResource(R.drawable.background_view_face_box_error)
         } else {
             nameLabel.text = name
-            nameLabel.setTextColor(Color.BLACK)
-            nameLabel.setBackgroundColor(Color.WHITE)
-            faceBox.setBackgroundResource(R.drawable.background_view_face_box_white)
+            faceBox.setBackgroundResource(R.drawable.background_view_face_box_confirm)
         }
     }
 
@@ -43,13 +41,16 @@ class FaceBoxView : LinearLayout, View.OnClickListener, ChildSelectDialog.OnChil
         orientation = VERTICAL
         setOnClickListener(this)
 
-        faceBox.setBackgroundResource(R.drawable.background_view_face_box_white)
+        faceBox.setBackgroundResource(R.drawable.background_view_face_box_confirm)
         faceBox.layoutParams = LinearLayout.LayoutParams(0, 0)
         addView(faceBox)
 
-        nameLabel.setBackgroundColor(Color.WHITE)
-        nameLabel.setTextColor(Color.BLACK)
-        nameLabel.layoutParams = LinearLayout.LayoutParams(0, 0)
+        nameLabel.background = DrawableUtil.createDrawable(corner = 12f, backgroundColor = ContextCompat.getColor(context, R.color.grey_f0))
+        nameLabel.setTextColor(ContextCompat.getColor(context, R.color.grey_74))
+        nameLabel.layoutParams = LinearLayout.LayoutParams(0, 0).apply {
+            // TODO 마진 크기에 맞게
+            setMargins(0, 36, 0, 0)
+        }
         nameLabel.gravity = Gravity.CENTER
         nameLabel.includeFontPadding = false
         addView(nameLabel)

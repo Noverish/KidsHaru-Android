@@ -22,6 +22,7 @@ class PictureActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image)
         ActivityUtil.setFullScreen(this.window)
+        // TODO 여기도 TeacherPictureActivity 와 똑같이
 
         nowPosition = intent.getIntExtra(POSITION_INTENT_KEY, 0)
         pictures = intent.getParcelableArrayExtra(PICTURES_INTENT_KEY).map { it as Picture }.toTypedArray()
