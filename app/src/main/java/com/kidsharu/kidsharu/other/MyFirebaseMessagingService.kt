@@ -2,6 +2,7 @@ package com.kidsharu.kidsharu.other
 
 import android.app.NotificationManager
 import android.content.Context
+import android.content.Intent
 import android.media.RingtoneManager
 import android.support.v4.app.NotificationCompat
 import android.util.Log
@@ -11,24 +12,33 @@ import com.kidsharu.kidsharu.R
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
-        if (remoteMessage!!.notification != null) {
-            sendNotification(remoteMessage.notification!!.body!!)
+        val rm = remoteMessage ?: return
+
+        remoteMessage.notification?.let { noti ->
+            val title = noti.title ?: return@let
+            val content = noti.body ?: return@let
+
+            // TODO channel and 1234
+            NotificationUtil.notify(this, MyNotificationChannel.AlbumProcessDone, 1234, title, content)
         }
-    }
 
-    private fun sendNotification(messageBody: String) {
-        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-        val notificationBuilder = NotificationCompat.Builder(this)
-            .setSmallIcon(R.mipmap.ic_launcher_round)
-            .setContentTitle("FCM Message")
-            .setContentText(messageBody)
-            .setSound(defaultSoundUri)
 
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        notificationManager.notify(0, notificationBuilder.build())
+
+//        val data = rm.data
+//
+//
+//
+//        val albumId = data["album_id"]!!.toInt()
+//        val string = data["string"]!!.toString()
+//
+//        val intent = Intent()
+//        intent.putExtra("album_id", albumId)
+//        intent.putExtra("string", string)
+//        intent.action = "com.kidsharu.kidsharu.action"
+//        sendBroadcast(intent)
     }
 
     override fun onNewToken(token: String?) {
-        System.out.println("Refreshed token: $token")
+//        System.out.println("Refreshed token: $token")
     }
 }

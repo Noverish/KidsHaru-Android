@@ -73,7 +73,7 @@ class PictureViewForTeacher : FrameLayout, OnMatrixChangedListener {
             val picture = picture ?: return
             ServerClient.faceList(picture.pictureId) { faces, errMsg ->
                 if (errMsg != null) {
-                    CrashUtil.onServerError(context, errMsg)
+                    CrashUtil.onServerError(errMsg, context)
                     return@faceList
                 }
 

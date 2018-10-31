@@ -49,7 +49,7 @@ class FaceBoxView : LinearLayout, View.OnClickListener, ChildSelectDialog.OnChil
 
         ServerClient.teacherChildList { children, errMsg ->
             if (errMsg != null) {
-                CrashUtil.onServerError(context, errMsg)
+                CrashUtil.onServerError(errMsg, context)
                 return@teacherChildList
             }
 
@@ -65,14 +65,14 @@ class FaceBoxView : LinearLayout, View.OnClickListener, ChildSelectDialog.OnChil
         LoadingDialogHelper.show(context)
         ServerClient.faceModify(face.faceId, child.childId) { errMsg1 ->
             if (errMsg1 != null) {
-                CrashUtil.onServerError(context, errMsg1)
+                CrashUtil.onServerError(errMsg1, context)
                 LoadingDialogHelper.dismiss()
                 return@faceModify
             }
 
             ServerClient.faceDetail(face.faceId) { newFace, errMsg2 ->
                 if (errMsg2 != null) {
-                    CrashUtil.onServerError(context, errMsg2)
+                    CrashUtil.onServerError(errMsg2, context)
                 } else {
                     this.face = newFace
                     this.nameLabel.text = child.name

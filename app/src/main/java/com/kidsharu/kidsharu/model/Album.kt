@@ -9,7 +9,9 @@ open class Album(
         val title: String,
         val content: String,
         val date: String,
-        val status: AlbumStatus
+        var status: AlbumStatus,
+        var uploadNumNow: Int = -1,
+        var uploadNumMax: Int = -1
 ) : Parcelable {
     override fun toString(): String {
         return "Album(albumId=$albumId, title='$title', content='$content', date='$date', status='$status')"

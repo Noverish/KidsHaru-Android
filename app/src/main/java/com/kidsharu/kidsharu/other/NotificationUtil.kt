@@ -3,50 +3,119 @@ package com.kidsharu.kidsharu.other
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.media.AudioAttributes
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import android.support.v4.app.NotificationCompat
 import com.kidsharu.kidsharu.R
+import com.kidsharu.kidsharu.R.string.id
 
-// TODO More general 하게 만들기
 object NotificationUtil {
-    fun progressNotification(context: Context, id: Int, max: Int, progress: Int) {
-        val channelId = "album_add"
-        val channelName = "앨범 만들기"
-
-        val builder = NotificationCompat.Builder(context, channelId)
-        builder.setContentTitle("이미지 업로드 중입니다...")
-        builder.setContentText("$progress/$max")
-        builder.setSmallIcon(R.drawable.ic_file_upload_white_24dp)
-        builder.setProgress(max, progress, false)
-
-        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
+    fun init(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT)
-            channel.setSound(null, null)
-            notificationManager.createNotificationChannel(channel)
-        }
+            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationChannelList = notificationManager.notificationChannels
 
-        notificationManager.notify(id, builder.build())
+            MyNotificationChannel.values().forEach { myChannel ->
+                if (notificationChannelList.none { it.id == myChannel.id }) {
+                    val channel = NotificationChannel(myChannel.id, myChannel.channelName, myChannel.importance)
+                    channel.setSound(myChannel.sound, myChannel.audioAttr)
+                    notificationManager.createNotificationChannel(channel)
+                }
+            }
+        }
     }
 
-    fun progressNotification2(context: Context, id: Int, max: Int, progress: Int) {
-        val channelId = "album_add"
-        val channelName = "앨범 만들기"
+    fun notifyImageUploadProgress(context: Context,
+                                  id: Int,
+                                  now: Int,
+                                  max: Int) {
 
-        val builder = NotificationCompat.Builder(context, channelId)
-        builder.setContentTitle("이미지 업로드 완료 ($max/$max)")
-//        builder.setContentText("")
-        builder.setSmallIcon(R.drawable.ic_done_white_24dp)
+        val channel = MyNotificationChannel.ImageUpload
+        val content = "($now/$max)"
 
-        val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT)
-//            channel.setSound(null, null)
-            notificationManager.createNotificationChannel(channel)
+        val title: String
+        val smallIcon: Int
+        if (now != max) {
+            title = "이미지 업로드 중입니다..."
+            smallIcon = R.drawable.ic_file_upload_white_24dp
+        } else {
+            title = "이미지 업로드 완료"
+            smallIcon = R.drawable.ic_done_white_24dp
         }
 
-        notificationManager.notify(id, builder.build())
+        val notification = NotificationCompat.Builder(context, channel.id).apply {
+            setContentTitle(title)
+            setContentText(content)
+            setSmallIcon(smallIcon)
+            setProgress(max, now, false)
+            if (now != max)
+                setSound(null)
+            else
+                setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+        }.build()
+
+        (context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).run {
+            notify(id, notification)
+        }
     }
+
+    fun notify(context: Context,
+               channel: MyNotificationChannel,
+               id: Int,
+               title: String,
+               content: String) {
+        val notification = NotificationCompat.Builder(context, channel.id).apply {
+            setContentTitle(title)
+            setContentText(content)
+        }.build()
+
+        (context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).run {
+            notify(id, notification)
+        }
+    }
+}
+
+enum class MyNotificationChannel {
+    ImageUpload,
+    AlbumProcessDone;
+
+    val id: String
+        get() = when (this) {
+            ImageUpload -> "image_upload"
+            AlbumProcessDone -> "album_process_done"
+        }
+
+    val channelName: String
+        get() = when (this) {
+            ImageUpload -> "이미지 업로드"
+            AlbumProcessDone -> "앨범 처리 완료"
+        }
+
+    val importance: Int
+        get() =
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                when (this) {
+                    ImageUpload -> NotificationManager.IMPORTANCE_DEFAULT
+                    AlbumProcessDone -> NotificationManager.IMPORTANCE_DEFAULT
+                }
+            else
+                -1
+
+    val sound: Uri?
+        get() = when (this) {
+            ImageUpload -> null
+            AlbumProcessDone -> RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        }
+
+    val audioAttr: AudioAttributes?
+        get() = when (this) {
+            ImageUpload -> null
+            AlbumProcessDone ->
+                AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_UNKNOWN)
+                    .setUsage(AudioAttributes.USAGE_NOTIFICATION_EVENT)
+                    .build()
+        }
 }

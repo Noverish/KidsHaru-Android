@@ -5,6 +5,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
 import android.widget.Toast
+import com.google.firebase.iid.FirebaseInstanceId
 import com.kidsharu.kidsharu.R
 import com.kidsharu.kidsharu.dialog.LoadingDialogHelper
 import com.kidsharu.kidsharu.other.ActivityUtil
@@ -23,6 +24,11 @@ class LoginActivity : AppCompatActivity() {
         login_button.setOnClickListener { loginBtnClicked() }
         register_teacher.setOnClickListener { ActivityUtil.registerTeacher(this) }
         register_parent.setOnClickListener { ActivityUtil.registerParent(this) }
+
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { result ->
+            val token = result.token
+            println("token $token")
+        }
     }
 
     private fun loginBtnClicked() {

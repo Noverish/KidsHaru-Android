@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".other.GlobalApplication"
         android:allowBackup="true"
         android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
@@ -31,10 +32,9 @@
         <activity android:name=".activity.AlbumAddActivity" />
         <activity android:name=".activity.TeacherPictureActivity" />
 
-        <service
-            android:name=".other.MyFirebaseMessagingService">
+        <service android:name=".other.MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
     </application>

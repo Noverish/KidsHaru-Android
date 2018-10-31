@@ -18,12 +18,24 @@ class TeacherHomeActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         ActivityUtil.setStatusBarColor(this, Color.WHITE, true)
 
+        album_refresh_layout.setOnRefreshListener {
+            refresh()
+        }
+
         album_add_btn.setOnClickListener { ActivityUtil.albumAdd(this) }
 
-        // TODO pull to refresh
+        refresh()
+    }
+
+    private fun refresh() {
         ServerClient.teacherAlbumList { albums, errMsg ->
+            if (errMsg != null) {
+                println(errMsg)
+                return@teacherAlbumList
+            }
+
             album_recycler_view.adapter = AlbumRecyclerAdapter(albums)
-            errMsg?.let { println(it) }
+            album_refresh_layout.isRefreshing = false
         }
     }
 }
