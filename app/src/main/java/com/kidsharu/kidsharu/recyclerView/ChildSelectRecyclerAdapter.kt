@@ -10,12 +10,10 @@ class ChildSelectRecyclerAdapter(
         private val children: Array<Child>,
         private var nowSelectedChildId: Int?
 ) : RecyclerView.Adapter<ChildSelectViewHolder>(), ChildSelectView.OnChildSelectedListener {
-    var onChildSelectedListener: ChildSelectRecyclerAdapter.OnChildSelectedListener? = null
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildSelectViewHolder {
         val childView = ChildSelectView(parent.context)
         childView.layoutParams = RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        childView.onChildSelectedListener = this@ChildSelectRecyclerAdapter
+        childView.onChildSelectedListener = this
         return ChildSelectViewHolder(childView)
     }
 
@@ -34,11 +32,10 @@ class ChildSelectRecyclerAdapter(
     override fun onChildSelected(child: Child) {
         nowSelectedChildId = child.childId
         notifyDataSetChanged()
-        onChildSelectedListener?.onChildSelected(child)
     }
 
-    interface OnChildSelectedListener {
-        fun onChildSelected(child: Child)
+    fun getNowSelectedChild(): Child {
+        return children.first { child -> child.childId == nowSelectedChildId }
     }
 }
 

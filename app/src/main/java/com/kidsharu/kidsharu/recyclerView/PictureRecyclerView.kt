@@ -3,12 +3,14 @@ package com.kidsharu.kidsharu.recyclerView
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import com.kidsharu.kidsharu.model.Album
 import com.kidsharu.kidsharu.model.Picture
 import com.kidsharu.kidsharu.other.ActivityUtil
 import com.kidsharu.kidsharu.other.ServerClient
 import com.kidsharu.kidsharu.view.PictureViewForParent
 
 class PictureRecyclerAdapter(
+        private val album: Album,
         private val pictures: Array<Picture>
 ) : RecyclerView.Adapter<PicturePreviewHolder>(), View.OnClickListener {
 
@@ -36,7 +38,7 @@ class PictureRecyclerAdapter(
         val position = pictures.indexOf(picture)
 
         if (ServerClient.isTeacher)
-            ActivityUtil.teacherPicture(view.context, pictures, position)
+            ActivityUtil.teacherPicture(view.context, album, pictures, position)
         else
             ActivityUtil.pictureDetail(view.context, pictures, position)
     }

@@ -25,14 +25,25 @@ class FaceBoxView : LinearLayout, View.OnClickListener, ChildSelectDialog.OnChil
     var nameLabel = TextView(context)
 
     var face: Face? by Delegates.observable<Face?>(null) { property, old, new ->
-        nameLabel.text = new?.childName
+        val name = new?.childName?.takeIf { it != "" }
+        if (name == null) {
+            nameLabel.text = "???"
+            nameLabel.setTextColor(Color.WHITE)
+            nameLabel.setBackgroundColor(Color.RED)
+            faceBox.setBackgroundResource(R.drawable.background_view_face_box_red)
+        } else {
+            nameLabel.text = name
+            nameLabel.setTextColor(Color.BLACK)
+            nameLabel.setBackgroundColor(Color.WHITE)
+            faceBox.setBackgroundResource(R.drawable.background_view_face_box_white)
+        }
     }
 
     init {
         orientation = VERTICAL
         setOnClickListener(this)
 
-        faceBox.setBackgroundResource(R.drawable.background_view_face_box)
+        faceBox.setBackgroundResource(R.drawable.background_view_face_box_white)
         faceBox.layoutParams = LinearLayout.LayoutParams(0, 0)
         addView(faceBox)
 

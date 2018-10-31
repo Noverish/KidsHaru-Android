@@ -101,12 +101,14 @@ object ActivityUtil {
     }
 
     fun teacherPicture(context: Context,
+                       album: Album,
                        pictures: Array<Picture>,
                        nowPage: Int? = null) {
         val intent = Intent(context, TeacherPictureActivity::class.java)
         nowPage?.let {
             intent.putExtra(TeacherPictureActivity.POSITION_INTENT_KEY, it)
         }
+        intent.putExtra(TeacherPictureActivity.ALBUM_INTENT_KEY, album)
         intent.putExtra(TeacherPictureActivity.PICTURES_INTENT_KEY, pictures)
         context.startActivity(intent)
     }

@@ -3,8 +3,11 @@ package com.kidsharu.kidsharu.activity
 import android.os.Bundle
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.view.WindowManager
 import com.kidsharu.kidsharu.R
+import com.kidsharu.kidsharu.model.Album
+import com.kidsharu.kidsharu.model.AlbumStatus
 import com.kidsharu.kidsharu.model.Picture
 import com.kidsharu.kidsharu.other.ActivityUtil
 import com.kidsharu.kidsharu.viewPager.PicturePagerAdapter
@@ -16,10 +19,12 @@ class TeacherPictureActivity : AppCompatActivity() {
     companion object {
         const val POSITION_INTENT_KEY = "position"
         const val PICTURES_INTENT_KEY = "previews"
+        const val ALBUM_INTENT_KEY = "album"
     }
 
     private var nowPosition = 0
     private lateinit var pictures: Array<Picture>
+    private lateinit var album: Album
     private var isFaceMode = BehaviorSubject.create<Boolean>().apply { onNext(false) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +35,7 @@ class TeacherPictureActivity : AppCompatActivity() {
 
         nowPosition = intent.getIntExtra(POSITION_INTENT_KEY, 0)
         pictures = intent.getParcelableArrayExtra(PICTURES_INTENT_KEY).map { it as Picture }.toTypedArray()
+        album = intent.getParcelableExtra(ALBUM_INTENT_KEY)
 
         face_btn.setOnClickListener { faceBtnClicked() }
         total_page_label.text = "${pictures.size}"
@@ -42,6 +48,9 @@ class TeacherPictureActivity : AppCompatActivity() {
 
             override fun onPageSelected(position: Int) {
                 now_page_label.text = (position + 1).toString()
+
+                if (album.status == AlbumStatus.checking)
+                    share_confirm_button.visibility = if (position == pictures.size - 1) View.VISIBLE else View.INVISIBLE
             }
 
             override fun onPageScrollStateChanged(state: Int) {

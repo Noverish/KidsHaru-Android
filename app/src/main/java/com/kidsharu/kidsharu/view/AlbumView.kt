@@ -48,8 +48,8 @@ class AlbumView : FrameLayout, View.OnClickListener {
             }
         } else {
             status_label.text = when(album.status) {
-                AlbumStatus.uploading -> "업로드 중"
-                AlbumStatus.processing -> "처리 중"
+                AlbumStatus.uploading -> "업로드 준비 중..."
+                AlbumStatus.processing -> "처리 중..."
                 AlbumStatus.checking -> "검토 필요"
                 else -> ""
             }
