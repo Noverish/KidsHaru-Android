@@ -31,8 +31,6 @@ class AlbumAddService : Service() {
             paths = getStringArrayExtra(PATHS_INTENT_KEY)
         }
 
-        EventBus.main.register(this)
-
         thread {
             createAlbumAndUploadPictures()
         }
@@ -107,10 +105,5 @@ class AlbumAddService : Service() {
             EventBus.main.post(AlbumModifyEvent(album))
             stopSelf()
         }
-    }
-
-    override fun onDestroy() {
-        EventBus.main.unregister(this)
-        super.onDestroy()
     }
 }

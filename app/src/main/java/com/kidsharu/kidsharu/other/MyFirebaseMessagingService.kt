@@ -1,14 +1,7 @@
 package com.kidsharu.kidsharu.other
 
-import android.app.NotificationManager
-import android.content.Context
-import android.content.Intent
-import android.media.RingtoneManager
-import android.support.v4.app.NotificationCompat
-import android.util.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.kidsharu.kidsharu.R
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
@@ -22,20 +15,25 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             NotificationUtil.notify(this, MyNotificationChannel.AlbumProcessDone, 1234, title, content)
         }
 
+        val code = rm.data["code"]?.toIntOrNull() ?: return
 
+        if (code == 1) {
+            val title = rm.data["title"] ?: return
+            val body = rm.data["body"] ?: return
+            val albumId = rm.data["album_id"]?.toIntOrNull() ?: return
 
-//        val data = rm.data
-//
-//
-//
-//        val albumId = data["album_id"]!!.toInt()
-//        val string = data["string"]!!.toString()
-//
-//        val intent = Intent()
-//        intent.putExtra("album_id", albumId)
-//        intent.putExtra("string", string)
-//        intent.action = "com.kidsharu.kidsharu.action"
-//        sendBroadcast(intent)
+            ServerClient.albumDetail(albumId) { album, errMsg ->
+                if (errMsg != null) {
+                    CrashUtil.onServerError(errMsg, this)
+                    return@albumDetail
+                }
+
+                if (album != null) {
+                    NotificationUtil.notify(this, MyNotificationChannel.AlbumProcessDone, 1235, title, body)
+                    EventBus.main.post(AlbumModifyEvent(album))
+                }
+            }
+        }
     }
 
     override fun onNewToken(token: String?) {

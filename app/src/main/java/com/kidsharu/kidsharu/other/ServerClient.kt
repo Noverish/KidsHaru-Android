@@ -218,6 +218,19 @@ object ServerClient {
         }
     }
 
+    fun albumDetail(albumId: Int,
+                    callback: (Album?, String?) -> Unit) {
+        val path = "/albums/$albumId"
+        val parameter = ""
+
+        request(parameter, path, Method.GET) { code, json, _ ->
+            when (code) {
+                200 -> callback(Album(json), null)
+                else -> callback(null, json.getString("msg"))
+            }
+        }
+    }
+
     fun albumModify(albumId: Int,
                     title: String? = null,
                     content: String? = null,

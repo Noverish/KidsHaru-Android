@@ -69,6 +69,7 @@ object NotificationUtil {
         val notification = NotificationCompat.Builder(context, channel.id).apply {
             setContentTitle(title)
             setContentText(content)
+            setSmallIcon(R.drawable.ic_done_white_24dp)
         }.build()
 
         (context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager).run {
