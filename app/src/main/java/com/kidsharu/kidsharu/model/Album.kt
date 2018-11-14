@@ -10,11 +10,17 @@ open class Album(
         val content: String,
         val date: String,
         var status: AlbumStatus,
+        val processingPictureNum: Int,
+        val checkingPictureNum: Int,
+        val donePictureNum: Int,
         var uploadNumNow: Int = -1,
         var uploadNumMax: Int = -1
 ) : Parcelable {
+    val totalPictureNum: Int
+        get() = processingPictureNum + checkingPictureNum + donePictureNum
+
     override fun toString(): String {
-        return "Album(albumId=$albumId, title='$title', content='$content', date='$date', status='$status')"
+        return "Album(albumId=$albumId, title='$title', content='$content', date='$date', status=$status, processingPictureNum=$processingPictureNum, checkingPictureNum=$checkingPictureNum, donePictureNum=$donePictureNum, uploadNumNow=$uploadNumNow, uploadNumMax=$uploadNumMax)"
     }
 
     constructor(json: JSONObject) : this(
@@ -22,7 +28,10 @@ open class Album(
             json.getString("title"),
             json.getString("content"),
             json.getString("date"),
-            AlbumStatus.valueOf(json.getString("status"))
+            AlbumStatus.valueOf(json.getString("status")),
+            json.getInt("processing_pic"),
+            json.getInt("checking_pic"),
+            json.getInt("done_pic")
     )
 
     constructor(source: Parcel) : this(
@@ -30,7 +39,10 @@ open class Album(
             source.readString(),
             source.readString(),
             source.readString(),
-            AlbumStatus.valueOf(source.readString())
+            AlbumStatus.valueOf(source.readString()),
+            source.readInt(),
+            source.readInt(),
+            source.readInt()
     )
 
     override fun describeContents() = 0
@@ -41,6 +53,9 @@ open class Album(
         writeString(content)
         writeString(date)
         writeString(status.toString())
+        writeInt(processingPictureNum)
+        writeInt(checkingPictureNum)
+        writeInt(donePictureNum)
     }
 
     companion object {

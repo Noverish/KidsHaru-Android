@@ -38,34 +38,23 @@ class AlbumView : FrameLayout, View.OnClickListener {
 
         status_label.visibility = if (album.status == AlbumStatus.done) View.GONE else View.VISIBLE
 
-        if (album.uploadNumMax != -1) {
-            status_label.text = when(album.status) {
-                // TODO %d 로 strings.xml 로 하기
-                AlbumStatus.uploading -> "업로드 중 (${album.uploadNumNow}/${album.uploadNumMax})"
-                AlbumStatus.processing -> "처리 중 (${album.uploadNumNow}/${album.uploadNumMax})"
-                AlbumStatus.checking -> "검토 필요 (${album.uploadNumNow}/${album.uploadNumMax})"
-                else -> ""
-            }
-        } else {
-            status_label.text = when(album.status) {
-                AlbumStatus.uploading -> "업로드 준비 중..."
-                AlbumStatus.processing -> "처리 중..."
-                AlbumStatus.checking -> "검토 필요"
-                else -> ""
-            }
+        status_label.text = when(album.status) {
+            // TODO %d 로 strings.xml 로 하기
+            AlbumStatus.uploading ->
+                if (album.uploadNumMax == -1)
+                    "업로드 준비 중..."
+                else
+                    "업로드 중 (${album.uploadNumNow}/${album.uploadNumMax})"
+            AlbumStatus.processing -> "처리 중 (${album.checkingPictureNum}/${album.totalPictureNum})"
+            AlbumStatus.checking -> "검토 필요"
+            else -> ""
         }
     }
 
     fun setAlbumPictures(albumPictures: Array<Picture>) {
-        val totalSame = this.albumPictures.foldIndexed(false) { index, acc, picture ->
-            val newPicture = albumPictures[index]
-            acc || (newPicture.pictureUrl == picture.pictureUrl)
-        }
-
-        val top5Same = this.albumPictures.take(5).foldIndexed(false) { index, acc, picture ->
-            val newPicture = albumPictures[index]
-            acc || (newPicture.pictureUrl != picture.pictureUrl)
-        }
+        val oldTop5 = this.albumPictures.take(5)
+        val newTop5 = albumPictures.take(5)
+        val top5Same = oldTop5.toTypedArray().contentEquals(newTop5.toTypedArray())
 
         this.albumPictures = albumPictures
 

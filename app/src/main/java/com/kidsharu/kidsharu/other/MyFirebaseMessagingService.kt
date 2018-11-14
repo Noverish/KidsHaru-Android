@@ -1,7 +1,12 @@
 package com.kidsharu.kidsharu.other
 
+import android.os.Handler
+import android.os.Looper
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.kidsharu.kidsharu.model.Album
+import org.json.JSONException
+import org.json.JSONObject
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
@@ -15,23 +20,18 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             NotificationUtil.notify(this, MyNotificationChannel.AlbumProcessDone, 1234, title, content)
         }
 
-        val code = rm.data["code"]?.toIntOrNull() ?: return
+        val message = rm.data["message"]
+        val data =rm.data["data"]
 
-        if (code == 1) {
-            val title = rm.data["title"] ?: return
-            val body = rm.data["body"] ?: return
-            val albumId = rm.data["album_id"]?.toIntOrNull() ?: return
-
-            ServerClient.albumDetail(albumId) { album, errMsg ->
-                if (errMsg != null) {
-                    CrashUtil.onServerError(errMsg, this)
-                    return@albumDetail
-                }
-
-                if (album != null) {
-                    NotificationUtil.notify(this, MyNotificationChannel.AlbumProcessDone, 1235, title, body)
+        when (message) {
+            "album_modified" -> {
+                val album = Album(JSONObject(data))
+                Handler(Looper.getMainLooper()).post {
                     EventBus.main.post(AlbumModifyEvent(album))
                 }
+            }
+            else -> {
+
             }
         }
     }
