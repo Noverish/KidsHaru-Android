@@ -6,4 +6,5 @@
     <dimen name="album_recycler_view_horizontal_spacing">4dp</dimen>
     <dimen name="album_view_elevation">7dp</dimen>
     <dimen name="picture_recycler_view_spacing">1dp</dimen>
+    <dimen name="children_manage_recycler_view_spacing">4dp</dimen>
 </resources>

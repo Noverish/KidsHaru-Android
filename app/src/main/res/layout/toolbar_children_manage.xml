@@ -20,14 +20,6 @@
             android:layout_height="54dp"
             android:layout_centerHorizontal="true"
             android:src="@drawable/logo" />
-
-        <ImageView
-            android:id="@+id/children_manage_button"
-            android:layout_width="31dp"
-            android:layout_height="31dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="12dp"
-            android:src="@drawable/icon_hamberger" />
     </RelativeLayout>
 
     <LinearLayout
@@ -42,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
-            android:text="@string/teacher_home_title"
+            android:text="@string/children_manage_title"
             android:textColor="#2a2a2a"
             android:textSize="16sp"
             android:textStyle="normal" />
@@ -51,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-light"
-            android:text="@string/teacher_home_sub_title"
+            android:text="@string/children_manage_sub_title"
             android:textColor="#2a2a2a"
             android:textSize="14sp"
             android:textStyle="normal" />

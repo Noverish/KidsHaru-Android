@@ -16,7 +16,7 @@ import kotlin.concurrent.thread
 
 
 object ServerClient {
-    private const val HOST = "https://fc3i3hiwel.execute-api.ap-northeast-2.amazonaws.com/develop"
+    private const val HOST = "https://gimic6gh9i.execute-api.ap-northeast-2.amazonaws.com/develop"
     private val JSON = MediaType.parse("application/json; charset=utf-8")
     private val JPEG = MediaType.parse("image/jpeg")
     private val client = OkHttpClient()

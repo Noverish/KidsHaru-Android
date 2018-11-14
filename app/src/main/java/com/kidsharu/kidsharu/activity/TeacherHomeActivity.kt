@@ -1,5 +1,6 @@
 package com.kidsharu.kidsharu.activity
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -8,7 +9,7 @@ import com.kidsharu.kidsharu.other.ActivityUtil
 import com.kidsharu.kidsharu.other.ServerClient
 import com.kidsharu.kidsharu.recyclerView.AlbumRecyclerAdapter
 import kotlinx.android.synthetic.main.activity_teacher_home.*
-import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.toolbar_teacher_home.*
 
 class TeacherHomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +24,12 @@ class TeacherHomeActivity : AppCompatActivity() {
         }
 
         album_add_btn.setOnClickListener { ActivityUtil.albumAdd(this) }
+
+        children_manage_button.setOnClickListener {
+            // TODO ActivityUtil
+            val intent = Intent(this, ChildrenManageActivity::class.java)
+            startActivity(intent)
+        }
 
         refresh()
     }

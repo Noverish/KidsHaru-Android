@@ -34,4 +34,7 @@
 
     <string name="share_title">공유하기</string>
     <string name="share_sub_title">아이들의 예쁜 모습을 공유합니다.</string>
+
+    <string name="children_manage_title">원아 관리하기</string>
+    <string name="children_manage_sub_title">사랑스러운 아이들을 쉽게 관리해보세요</string>
 </resources>
