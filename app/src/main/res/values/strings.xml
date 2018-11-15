@@ -4,6 +4,13 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="splash">splash</string>
 
+    <string name="cancel">취소</string>
+    <string name="confirm_formal">확인했어요</string>
+    <string name="child_name">원아이름</string>
+    <string name="parent_contact">학부모 번호</string>
+    <string name="contact_example">010–0000–0000</string>
+    <string name="name_example">김철수</string>
+
     <string name="id">아이디</string>
     <string name="pw">패스워드</string>
     <string name="id_hint">아이디를 입력해주세요</string>

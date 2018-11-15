@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="312dp"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="147dp">
+
+        <ImageView
+            android:id="@+id/icon_baby"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="37dp"
+            android:src="@drawable/icon_baby"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/child_name"
+            android:textColor="#2a2a2a"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/icon_baby"
+            app:layout_constraintStart_toEndOf="@id/icon_baby"
+            app:layout_constraintTop_toTopOf="@id/icon_baby" />
+
+        <EditText
+            android:id="@+id/name_field"
+            android:layout_width="155dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="134dp"
+            android:hint="@string/name_example"
+            android:inputType="text"
+            android:textColor="#2a2a2a"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/icon_baby"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/icon_baby" />
+
+        <ImageView
+            android:id="@+id/icon_call"
+            android:layout_width="29dp"
+            android:layout_height="29dp"
+            android:layout_marginTop="19dp"
+            android:src="@drawable/icon_call_small"
+            app:layout_constraintStart_toStartOf="@id/icon_baby"
+            app:layout_constraintTop_toBottomOf="@id/icon_baby" />
+
+        <TextView
+            android:id="@+id/contact_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/parent_contact"
+            android:textColor="#2a2a2a"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/icon_call"
+            app:layout_constraintStart_toEndOf="@id/icon_call"
+            app:layout_constraintTop_toTopOf="@id/icon_call" />
+
+        <EditText
+            android:id="@+id/contact_field"
+            android:layout_width="155dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="134dp"
+            android:hint="@string/contact_example"
+            android:inputType="text"
+            android:textColor="#2a2a2a"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/icon_call"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/icon_call" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/yellow1"
+            android:text="@string/cancel"
+            android:textColor="#2a2a2a"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#979797" />
+
+        <Button
+            android:id="@+id/confirm_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/yellow1"
+            android:text="@string/confirm_formal"
+            android:textColor="#2a2a2a"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>

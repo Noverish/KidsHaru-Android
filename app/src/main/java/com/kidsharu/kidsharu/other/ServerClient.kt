@@ -170,6 +170,23 @@ object ServerClient {
         }
     }
 
+    fun teacherChildAdd(name: String,
+                        contact: String,
+                        callback: (Child?, String?) -> Unit) {
+        val path = "/teachers/$teacherId/children"
+        val parameter = JSONObject().apply {
+            put("name", name)
+            put("contact", contact)
+        }.toString()
+
+        request(parameter, path, Method.POST) { code, json, array ->
+            when (code) {
+                200 -> callback(Child(json), null)
+                else -> callback(null, json.getString("msg"))
+            }
+        }
+    }
+
     // album
     fun teacherAlbumList(callback: (Array<Album>, String?) -> Unit) {
         val path = "/teachers/$teacherId/albums"

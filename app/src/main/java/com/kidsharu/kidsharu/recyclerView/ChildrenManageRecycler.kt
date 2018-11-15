@@ -7,7 +7,7 @@ import com.kidsharu.kidsharu.model.Child
 import com.kidsharu.kidsharu.view.ChildrenManageView
 
 class ChildrenManageRecyclerAdapter(
-        private val children: Array<Child>
+        private var children: Array<Child>
 ) : RecyclerView.Adapter<ChildrenManageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChildrenManageViewHolder {
@@ -25,6 +25,20 @@ class ChildrenManageRecyclerAdapter(
         val child = children[position]
 
         view.setChild(child)
+    }
+
+    fun insert(child: Child): Int {
+        val newChildren = Array(children.size + 1) { index ->
+            if (index < children.size)
+                children[index]
+            else
+                child
+        }
+        this.children = newChildren
+
+        notifyItemInserted(newChildren.size)
+
+        return newChildren.size
     }
 }
 
