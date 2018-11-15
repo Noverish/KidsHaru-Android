@@ -12,6 +12,7 @@ import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
+import java.lang.reflect.Method
 import kotlin.concurrent.thread
 
 
@@ -378,12 +379,12 @@ object ServerClient {
 
     }
 
-    fun faceModify(faceId: Int,
-                   childId: Int? = null,
-                   callback: (String?) -> Unit) {
-        val path = "/faces/$faceId"
+    fun faceChildConnect(faceId: Int,
+                         childId: Int? = null,
+                         callback: (String?) -> Unit) {
+        val path = "/faces/$faceId/child"
         val parameter = JSONObject().apply {
-            if (childId != null) put("child_id", childId)
+            put("child_id", childId)
         }.toString()
 
         request(parameter, path, Method.PUT) { code, json, _ ->

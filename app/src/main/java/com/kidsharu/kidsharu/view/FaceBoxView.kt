@@ -75,11 +75,11 @@ class FaceBoxView : LinearLayout, View.OnClickListener, ChildSelectDialog.OnChil
         val face = face ?: return
 
         LoadingDialogHelper.show(context)
-        ServerClient.faceModify(face.faceId, child.childId) { errMsg1 ->
+        ServerClient.faceChildConnect(face.faceId, child.childId) { errMsg1 ->
             if (errMsg1 != null) {
                 CrashUtil.onServerError(errMsg1, context)
                 LoadingDialogHelper.dismiss()
-                return@faceModify
+                return@faceChildConnect
             }
 
             ServerClient.faceDetail(face.faceId) { newFace, errMsg2 ->
