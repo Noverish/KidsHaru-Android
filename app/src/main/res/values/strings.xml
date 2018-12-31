@@ -44,4 +44,7 @@
 
     <string name="children_manage_title">원아 관리하기</string>
     <string name="children_manage_sub_title">사랑스러운 아이들을 쉽게 관리해보세요</string>
+
+    <string name="parent_my_child_title">내 아이 사진 보기</string>
+    <string name="parent_my_child_sub_title">나의 아이의 사진만 감상해보세요</string>
 </resources>

@@ -8,9 +8,14 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
 import com.kidsharu.kidsharu.R
+import com.kidsharu.kidsharu.dialog.LoadingDialogHelper
 import com.kidsharu.kidsharu.model.Album
 import com.kidsharu.kidsharu.model.AlbumStatus
 import com.kidsharu.kidsharu.model.Picture
+import com.kidsharu.kidsharu.other.AlbumModifyEvent
+import com.kidsharu.kidsharu.other.CrashUtil
+import com.kidsharu.kidsharu.other.EventBus
+import com.kidsharu.kidsharu.other.ServerClient
 import com.kidsharu.kidsharu.viewPager.PicturePagerAdapter
 import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.activity_teacher_picture.*
@@ -62,6 +67,26 @@ class TeacherPictureActivity : AppCompatActivity() {
 
             }
         })
+
+        share_confirm_button.setOnClickListener {
+            LoadingDialogHelper.show(this)
+
+            ServerClient.albumModify(album.albumId, status=AlbumStatus.done) { errMsg ->
+                if (errMsg != null) {
+                    CrashUtil.onServerError(errMsg, this)
+                    return@albumModify
+                }
+
+                ServerClient.albumDetail(album.albumId) { newAlbum, errMsg ->
+                    if (newAlbum != null) {
+                        EventBus.main.post(AlbumModifyEvent(newAlbum))
+                    }
+                }
+
+                finish()
+                LoadingDialogHelper.dismiss()
+            }
+        }
 
         view_pager.currentItem = nowPosition
         now_page_label.text = (nowPosition + 1).toString()

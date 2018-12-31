@@ -1,5 +1,6 @@
 package com.kidsharu.kidsharu.activity
 
+import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -7,14 +8,17 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
 import com.kidsharu.kidsharu.R
+import com.kidsharu.kidsharu.model.Child
 import com.kidsharu.kidsharu.other.ActivityUtil
 import com.kidsharu.kidsharu.other.ServerClient
 import com.kidsharu.kidsharu.recyclerView.AlbumRecyclerAdapter
 import com.kidsharu.kidsharu.recyclerView.ChildRecyclerAdapter
 import kotlinx.android.synthetic.main.activity_parent_home.*
-import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.toolbar_parent_home.*
 
 class ParentHomeActivity : AppCompatActivity() {
+    private var nowSelectedChild: Child? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_parent_home)
@@ -47,8 +51,18 @@ class ParentHomeActivity : AppCompatActivity() {
         ServerClient.parentChildList { children, errMsg ->
             errMsg?.let { println(it) }
             child_recycler_view.adapter = ChildRecyclerAdapter(children).apply {
-                itemTouchCallback = { _ -> drawer_layout.closeDrawer(GravityCompat.START) }
+                itemTouchCallback = { childId ->
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                    nowSelectedChild = childId
+                }
             }
+        }
+
+        // TODO Change button name
+        child_view_button.setOnClickListener {
+            val intent = Intent(this@ParentHomeActivity, ParentMyChildActivity::class.java)
+            intent.putExtra(ParentMyChildActivity.CHILD_ID_INTENT_KEY, nowSelectedChild?.childId ?: 1)
+            startActivity(intent)
         }
     }
 

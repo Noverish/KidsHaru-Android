@@ -20,6 +20,7 @@
             android:textColor="#2a2a2a"
             android:textSize="14sp"
             android:textStyle="normal"
+            android:gravity="center_vertical"
             app:layout_constraintEnd_toStartOf="@id/right_arrow"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

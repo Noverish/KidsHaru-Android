@@ -397,6 +397,22 @@ object ServerClient {
         }
     }
 
+    fun childPictureList(childId: Int,
+                         callback: (Array<Picture>, String?) -> Unit) {
+        val path = "/children/$childId/pictures"
+        val parameter = ""
+
+        request(parameter, path, Method.GET) { code, json, array ->
+            when (code) {
+                200 -> {
+                    val pictureArray = Array(array.length()) { Picture(array.getJSONObject(it)) }
+                    callback(pictureArray, null)
+                }
+                else -> callback(emptyArray(), json.getString("msg"))
+            }
+        }
+    }
+
     private enum class Method {
         POST,
         GET,

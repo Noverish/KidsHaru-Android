@@ -34,7 +34,7 @@ class AlbumView : FrameLayout, View.OnClickListener {
         this.album = album
 
         title_label.text = album.title
-        date_label.text = album.date
+        date_label.text = album.date.split(" ")[0]
 
         status_label.visibility = if (album.status == AlbumStatus.done) View.GONE else View.VISIBLE
 

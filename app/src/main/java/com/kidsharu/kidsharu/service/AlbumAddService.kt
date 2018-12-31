@@ -63,7 +63,7 @@ class AlbumAddService : Service() {
 
             this.album = album ?: return@teacherAlbumAdd
             EventBus.main.post(AlbumAddEvent(album))
-            paths.forEach { path -> uploadPicture(album.albumId, path) }
+            uploadPicture(album.albumId, paths[0])
         }
     }
 
@@ -90,6 +90,8 @@ class AlbumAddService : Service() {
             increaseUploadNum()
             if (uploadNum == paths.size)
                 changeAlbumStatus(albumId)
+            else
+                uploadPicture(album.albumId, paths[uploadNum])
         }
     }
 
@@ -99,11 +101,11 @@ class AlbumAddService : Service() {
                 CrashUtil.onServerError(errMsg)
             }
 
-            album.status = AlbumStatus.processing
-            album.uploadNumNow = -1
-            album.uploadNumMax = -1
-            EventBus.main.post(AlbumModifyEvent(album))
-            stopSelf()
+            ServerClient.albumDetail(albumId) { newAlbum, _ ->
+                if (newAlbum != null)
+                    EventBus.main.post(AlbumModifyEvent(newAlbum))
+                stopSelf()
+            }
         }
     }
 }

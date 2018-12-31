@@ -32,6 +32,7 @@
         <activity android:name=".activity.AlbumAddActivity" />
         <activity android:name=".activity.TeacherPictureActivity" />
         <activity android:name=".activity.ChildrenManageActivity" />
+        <activity android:name=".activity.ParentMyChildActivity" />
 
         <service android:name=".other.MyFirebaseMessagingService">
             <intent-filter>
